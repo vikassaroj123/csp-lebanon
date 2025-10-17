@@ -329,20 +329,27 @@
 
                     <script>
                         (function () {
-                            // Choose your Zoho data center: 'sa' for crm.zoho.sa (Lebanon) or 'com' for crm.zoho.com
-                            const ZDC = 'com';
+                            // If your CRM is NOT .com, change this to 'sa' (KSA DC), 'in', 'eu', or 'com.au'
+                            // or set <html data-zoho-dc="sa"> and we'll pick it up automatically.
+                            const htmlDC = document.documentElement.getAttribute('data-zoho-dc');
+                            const ZDC = (htmlDC || 'com').toLowerCase();
+                            const ALLOWED = new Set(['com', 'sa', 'in', 'eu', 'com.au']);
 
                             const form = document.getElementById('bannerCrmForm');
                             const thanks = document.getElementById('bannerThanks');
                             const iframe = document.getElementById('bannerCrmTarget');
                             const submit = document.getElementById('bannerSubmitBtn');
 
-                            // Point to Zoho CRM Web-to-Lead endpoint
-                            form.setAttribute('action', 'https://crm.zoho.' + ZDC + '/crm/WebToLeadForm');
+                            // Always point action at the correct data center
+                            if (ALLOWED.has(ZDC)) {
+                                form.action = 'https://crm.zoho.' + ZDC + '/crm/WebToLeadForm';
+                            }
 
-                            // Return URL + ad ids (optional)
+                            // Absolute return URL to the SAME host (must be in Allowed Domains in Zoho)
                             document.getElementById('banner_returnURL').value =
                                 location.origin + location.pathname + '?submitted=1#hero-thanks';
+
+                            // Pass through ad click ids if present
                             (function () {
                                 const zc = document.getElementById('banner_zc_gad'); if (!zc) return;
                                 const qs = new URLSearchParams(location.search);
@@ -359,117 +366,80 @@
                             }
                             function normalizeDigits(s) {
                                 return (s || '')
-                                    .replace(/[\u0660-\u0669]/g, ch => String.fromCharCode(ch.charCodeAt(0) - 0x0660 + 48)) // Arabic-Indic
-                                    .replace(/[\u06F0-\u06F9]/g, ch => String.fromCharCode(ch.charCodeAt(0) - 0x06F0 + 48)) // Ext Arabic-Indic
+                                    .replace(/[\u0660-\u0669]/g, ch => String.fromCharCode(ch.charCodeAt(0) - 0x0660 + 48))
+                                    .replace(/[\u06F0-\u06F9]/g, ch => String.fromCharCode(ch.charCodeAt(0) - 0x06F0 + 48))
                                     .replace(/\s+/g, ' ')
                                     .trim();
                             }
 
                             let submitted = false;
-                            let conversionSent = false; // prevent double firing
-
+                            let conversionSent = false;
                             function fireConversionOnce() {
                                 if (!conversionSent && typeof gtag_report_conversion === 'function') {
                                     conversionSent = true;
                                     try { gtag_report_conversion(); } catch (e) { }
                                 }
                             }
-
                             function showSuccessBelow() {
                                 thanks.innerHTML = '<div class="alert alert-success mb-0">We will contact you soon.</div>';
                                 thanks.style.display = '';
-                                submit.disabled = true; // prevent double submits
-
-                                // Google Ads conversion
+                                submit.disabled = true;
                                 fireConversionOnce();
-
                                 try { thanks.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); } catch (e) { }
                             }
-
                             function showFieldError(field, message) {
-                                const errorDiv = document.createElement('div');
-                                errorDiv.className = 'error-message text-danger small mt-1';
-                                errorDiv.textContent = message;
-                                field.parentNode.appendChild(errorDiv);
+                                const err = document.createElement('div');
+                                err.className = 'error-message text-danger small mt-1';
+                                err.textContent = message;
+                                field.parentNode.appendChild(err);
                             }
-
                             function isValidEmail(email) {
-                                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                                return emailRegex.test(email);
+                                return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
                             }
 
                             form.addEventListener('submit', function (e) {
-                                e.preventDefault(); // Always prevent default first
+                                e.preventDefault();
 
-                                // Honeypot
+                                // bot honeypot
                                 const hp = form.querySelector('[name="aG9uZXlwb3Q"]').value;
                                 if (hp && hp.trim()) { return; }
 
-                                // Form validation
                                 const fullName = document.getElementById('fullName');
                                 const companyName = document.getElementById('companyName');
                                 const phoneNumber = document.getElementById('phoneNumber');
                                 const email = document.getElementById('email');
 
-                                let isValid = true;
-                                let errorMessage = '';
-
-                                // Clear previous error messages
+                                // clear old errors
                                 document.querySelectorAll('.error-message').forEach(el => el.remove());
                                 document.querySelectorAll('.form-control').forEach(el => el.classList.remove('is-invalid'));
 
-                                // Validate Full Name
-                                if (!fullName.value.trim()) {
-                                    fullName.classList.add('is-invalid');
-                                    showFieldError(fullName, 'Please enter your full name');
-                                    isValid = false;
+                                let ok = true;
+                                if (!fullName.value.trim()) { fullName.classList.add('is-invalid'); showFieldError(fullName, 'Please enter your full name'); ok = false; }
+                                if (!companyName.value.trim()) { companyName.classList.add('is-invalid'); showFieldError(companyName, 'Please enter your company'); ok = false; }
+                                if (!phoneNumber.value.trim()) { phoneNumber.classList.add('is-invalid'); showFieldError(phoneNumber, 'Please enter your phone number'); ok = false; }
+                                if (!email.value.trim() || !isValidEmail(email.value)) {
+                                    email.classList.add('is-invalid'); showFieldError(email, 'Please enter a valid email'); ok = false;
                                 }
+                                if (!ok) return;
 
-
-                                // Validate Phone Number
-                                if (!phoneNumber.value.trim()) {
-                                    phoneNumber.classList.add('is-invalid');
-                                    showFieldError(phoneNumber, 'Please enter your phone number');
-                                    isValid = false;
-                                }
-
-                                // Validate Email
-                                if (!email.value.trim()) {
-                                    email.classList.add('is-invalid');
-                                    showFieldError(email, 'Please enter your email address');
-                                    isValid = false;
-                                } else if (!isValidEmail(email.value)) {
-                                    email.classList.add('is-invalid');
-                                    showFieldError(email, 'Please enter a valid email address');
-                                    isValid = false;
-                                }
-
-                                if (!isValid) {
-                                    return;
-                                }
-
-                                // Map Full Name -> First/Last
-                                const full = fullName.value;
-                                const parts = splitName(full);
+                                // Map Full → First/Last (Zoho requires Last Name)
+                                const parts = splitName(fullName.value);
                                 document.getElementById('banner_First_Name').value = parts.first;
-                                document.getElementById('banner_Last_Name').value = parts.last;
+                                document.getElementById('banner_Last_Name').value = parts.last || '(unknown)';
 
-                                // Normalize phone digits (handles Arabic numerals)
+                                // Normalize phone
                                 phoneNumber.value = normalizeDigits(phoneNumber.value);
 
                                 submitted = true;
-
-                                // Submit the form
                                 form.submit();
 
-                                // Fallback UX if cross-origin iframe cannot be read
+                                // Fallback success if Zoho blocks iframe rendering
                                 setTimeout(function () {
-                                    if (submitted && thanks.style.display === 'none') {
-                                        showSuccessBelow();
-                                    }
+                                    if (submitted && thanks.style.display === 'none') showSuccessBelow();
                                 }, 1200);
                             });
 
+                            // Fire success UI when the hidden iframe loads (if allowed)
                             iframe.addEventListener('load', function () {
                                 if (!submitted) return;
                                 showSuccessBelow();
