@@ -253,11 +253,11 @@
                         </div>
                     </div>
 
-                    <!-- === Right Banner Form (shows message below on submit) === -->
+                    <!-- === CSP4TECH x Zoho People/Payroll — Right Banner Form (shows message below on submit) === -->
                     <div class="col-lg-6 col-md-12 d-flex justify-content-start justify-content-lg-center"
                         data-aos="fade-left" data-aos-duration="1500">
                         <div class="banner_form_box ms-0 ms-lg-5 me-auto me-lg-0 text-start text-lg-start">
-                            <h3 class="form_title mb-4">Talk to a Certified Zoho Partner</h3>
+                            <h3 class="form_title mb-4">Get Started with Zoho</h3>
 
                             <form class="banner_form text-start text-lg-start" id="bannerCrmForm" method="POST"
                                 accept-charset="UTF-8" target="bannerCrmTarget" novalidate>
@@ -275,7 +275,7 @@
                                 <!-- Zoho requires First/Last Name; map from Full Name -->
                                 <input type="hidden" name="First Name" id="banner_First_Name" value="">
                                 <input type="hidden" name="Last Name" id="banner_Last_Name" value="">
-                                <input type="hidden" name="Lead Source" value="Vikas CSP4TECH (Zoho Business Page)">
+                                <input type="hidden" name="Lead Source" value="Vikas CSP4TECH">
 
                                 <div class="form-group mb-3">
                                     <label for="fullName" class="form-label">Full Name</label>
@@ -292,7 +292,7 @@
                                 <div class="form-group mb-3">
                                     <label for="phoneNumber" class="form-label">Phone Number</label>
                                     <input type="tel" id="phoneNumber" name="Phone" class="form-control"
-                                        placeholder="+961…" inputmode="tel" pattern="^[0-9+\-\s()]{7,20}$" required>
+                                        placeholder="+966…" inputmode="tel" pattern="^[0-9+\-\s()]{7,20}$" required>
                                 </div>
 
                                 <div class="form-group mb-4">
@@ -302,8 +302,7 @@
                                 </div>
 
                                 <button type="submit" id="bannerSubmitBtn" class="btn btn-primary w-100">
-                                    Submit
-                                </button>
+                                    Schedule a Demo </button>
 
                                 <div id="bannerThanks" class="mt-3 mb-0" style="display:none;" role="status"
                                     aria-live="polite"></div>
@@ -331,7 +330,7 @@
                     <script>
                         (function () {
                             // Choose your Zoho data center: 'sa' for crm.zoho.sa (Lebanon) or 'com' for crm.zoho.com
-                            const ZDC = 'in';
+                            const ZDC = 'com';
 
                             const form = document.getElementById('bannerCrmForm');
                             const thanks = document.getElementById('bannerThanks');
@@ -360,26 +359,29 @@
                             }
                             function normalizeDigits(s) {
                                 return (s || '')
-                                    .replace(/[\u0660-\u0669]/g, ch => String.fromCharCode(ch.charCodeAt(0) - 0x0660 + 48))
-                                    .replace(/[\u06F0-\u06F9]/g, ch => String.fromCharCode(ch.charCodeAt(0) - 0x06F0 + 48))
+                                    .replace(/[\u0660-\u0669]/g, ch => String.fromCharCode(ch.charCodeAt(0) - 0x0660 + 48)) // Arabic-Indic
+                                    .replace(/[\u06F0-\u06F9]/g, ch => String.fromCharCode(ch.charCodeAt(0) - 0x06F0 + 48)) // Ext Arabic-Indic
                                     .replace(/\s+/g, ' ')
                                     .trim();
                             }
 
                             let submitted = false;
-                            let conversionSent = false; // <-- ensures conversion fires once
+                            let conversionSent = false; // prevent double firing
 
-                            function showSuccessBelow() {
-                                // Show success to the user
-                                thanks.innerHTML = '<div class="alert alert-success mb-0">We will contact you soon.</div>';
-                                thanks.style.display = '';
-                                submit.disabled = true;
-
-                                // Fire Google Ads conversion once on success
+                            function fireConversionOnce() {
                                 if (!conversionSent && typeof gtag_report_conversion === 'function') {
                                     conversionSent = true;
-                                    gtag_report_conversion(); // no redirect
+                                    try { gtag_report_conversion(); } catch (e) { }
                                 }
+                            }
+
+                            function showSuccessBelow() {
+                                thanks.innerHTML = '<div class="alert alert-success mb-0">We will contact you soon.</div>';
+                                thanks.style.display = '';
+                                submit.disabled = true; // prevent double submits
+
+                                // Google Ads conversion
+                                fireConversionOnce();
 
                                 try { thanks.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); } catch (e) { }
                             }
@@ -452,7 +454,7 @@
                                 document.getElementById('banner_First_Name').value = parts.first;
                                 document.getElementById('banner_Last_Name').value = parts.last;
 
-                                // Normalize phone digits (in case Arabic numerals are typed)
+                                // Normalize phone digits (handles Arabic numerals)
                                 phoneNumber.value = normalizeDigits(phoneNumber.value);
 
                                 submitted = true;
