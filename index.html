@@ -90,28 +90,43 @@
   }
   </script>
 
-    <!-- Google tag (gtag.js) -->
+    <!-- Google tag (gtag.js) — single load, multi-account -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17470273516"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
 
-        /* If you already load gtag.js for GA4, keep that and add this line only: */
+        /* Existing Google Ads account */
         gtag('config', 'AW-17470273516');
 
-        /* Google Ads conversion event (Submit lead form - Landing Page (Zoho Wala)) */
+        /* NEW: add this line for the second Google Ads account */
+        gtag('config', 'AW-17557804164');
+
+        /* Conversion helper — fires on successful form submit (already called in your code) */
         function gtag_report_conversion(url) {
             var callback = function () { if (typeof url !== 'undefined') window.location = url; };
+
+            /* Existing account conversion (unchanged) */
             gtag('event', 'conversion', {
                 'send_to': 'AW-17470273516/WwTsCLfZpZobEOzvvIpB',
                 'value': 1.0,
                 'currency': 'INR',
                 'event_callback': callback
             });
+
+            /* NEW account conversion — add your label below when you create the conversion in Ads */
+            /* Find it in Google Ads: Tools & Settings → Conversions → your conversion → Install tag → Event snippet */
+            gtag('event', 'conversion', {
+                'send_to': 'AW-17557804164/REPLACE_WITH_LABEL',
+                'value': 1.0,
+                'currency': 'INR'
+            });
+
             return false;
         }
     </script>
+
 
 </head>
 
