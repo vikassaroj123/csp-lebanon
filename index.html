@@ -90,46 +90,69 @@
   }
   </script>
 
-    <!-- Google tag (gtag.js) — single load, multi-account -->
+    <!-- START Google Ads (primary only) + helpers -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17470273516"></script>
     <script>
+        // --- Core gtag setup ---
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
+        gtag('config', 'AW-17470273516', { allow_enhanced_conversions: true });
 
-        /* Existing Google Ads account */
-        gtag('config', 'AW-17470273516');
-
-        /* NEW: add this line for the second Google Ads account */
-        gtag('config', 'AW-17557804164');
-
-        /* Conversion helper — fires on successful form submit (already called in your code) */
-        function gtag_report_conversion(url) {
-            var callback = function () { if (typeof url !== 'undefined') window.location = url; };
-
-            /* Existing account conversion (unchanged) */
+        // --- Conversion helper (call after successful submit) ---
+        window.gtag_report_conversion = function (url) {
+            var cb = function () { if (typeof url !== 'undefined') window.location = url; };
             gtag('event', 'conversion', {
-                'send_to': 'AW-17470273516/WwTsCLfZpZobEOzvvIpB',
-                'value': 1.0,
-                'currency': 'INR',
-                'event_callback': callback
+                send_to: 'AW-17470273516/WwTsCLfZpZobEOzvvIpB', // keep your label
+                value: 1.0,                                     // optional
+                currency: 'INR',                                // optional
+                event_callback: cb
             });
-
-            /* NEW account conversion — add your label below when you create the conversion in Ads */
-            /* Find it in Google Ads: Tools & Settings → Conversions → your conversion → Install tag → Event snippet */
-            gtag('event', 'conversion', {
-                'send_to': 'AW-17557804164/REPLACE_WITH_LABEL',
-                'value': 1.0,
-                'currency': 'INR'
-            });
-
             return false;
-        }
+        };
+
+        // --- Click ID passthrough + persistence to your hidden field (#banner_zc_gad) ---
+        (function () {
+            try {
+                var qs = new URLSearchParams(location.search);
+                var keys = ['gclid', 'gbraid', 'wbraid'];
+                var found = keys.find(k => qs.get(k));
+                if (found) localStorage.setItem('ads_click_id', JSON.stringify({ k: found, v: qs.get(found) }));
+                var saved = localStorage.getItem('ads_click_id');
+                var field = document.getElementById('banner_zc_gad');
+                if (saved && field) field.value = JSON.parse(saved).v;
+            } catch (e) { }
+        })();
+
+        // --- Enhanced Conversions: set user_data right before form submit (capture phase runs first) ---
+        document.addEventListener('DOMContentLoaded', function () {
+            try {
+                var form = document.getElementById('bannerCrmForm');
+                if (form) {
+                    form.addEventListener('submit', function () {
+                        try {
+                            var email = (document.getElementById('email')?.value || '').trim().toLowerCase();
+                            var phone = (document.getElementById('phoneNumber')?.value || '').replace(/\D+/g, '');
+                            if (email || phone) gtag('set', 'user_data', { email: email || undefined, phone_number: phone || undefined });
+                        } catch (e) { }
+                    }, true); // capture
+                }
+            } catch (e) { }
+        });
+
+        // --- Fallback: if redirected back with ?submitted=1, fire conversion once ---
+        (function () {
+            try {
+                var qs = new URLSearchParams(location.search);
+                if (qs.get('submitted') === '1') {
+                    if (typeof window.gtag_report_conversion === 'function') window.gtag_report_conversion();
+                    history.replaceState({}, '', location.pathname + location.hash);
+                }
+            } catch (e) { }
+        })();
     </script>
-
-
+    <!-- END Google Ads -->
 </head>
-
 
 <body>
     <!-- Page-wrapper-Start -->
@@ -307,7 +330,8 @@
                                 <div class="form-group mb-3">
                                     <label for="phoneNumber" class="form-label">Phone Number</label>
                                     <input type="tel" id="phoneNumber" name="Phone" class="form-control"
-                                        placeholder="Enter your mobile number" inputmode="tel" pattern="^[0-9+\-\s()]{7,20}$" required>
+                                        placeholder="Enter your mobile number" inputmode="tel"
+                                        pattern="^[0-9+\-\s()]{7,20}$" required>
                                 </div>
 
                                 <div class="form-group mb-4">
@@ -1457,6 +1481,545 @@
                 }
             }
         </style>
+
+
+        <!-- ===================== Our Service Sector ===================== -->
+        <section class="row_am rq-sector-section" id="service-sectors">
+            <div class="container">
+                <h2 class="rq-sector-title text-center mb-4" data-aos="fade-up" data-aos-duration="800">
+                    Our Service Sector
+                </h2>
+
+                <div class="rq-sector-surface" data-aos="fade-up" data-aos-duration="900">
+                    <div class="rq-sector-grid">
+
+                        <!-- Left: vertical tabs -->
+                        <div class="rq-sector-nav" role="tablist" aria-label="Service sectors">
+                            <!-- Real Estate -->
+                            <button class="rq-sector-item is-active" role="tab" aria-selected="true"
+                                aria-controls="panel-realestate" id="tab-realestate" tabindex="0"
+                                data-target="panel-realestate">
+                                <span class="rq-icon rq-bg-blue" aria-hidden="true">
+                                    <!-- Home -->
+                                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M3 10.5L12 3l9 7.5" />
+                                        <path d="M5 10v10h14V10" />
+                                        <path d="M9 20v-6h6v6" />
+                                    </svg>
+                                </span>
+                                <span class="rq-label">Real Estate</span>
+                            </button>
+
+                            <!-- Logistics -->
+                            <button class="rq-sector-item" role="tab" aria-selected="false"
+                                aria-controls="panel-logistics" id="tab-logistics" tabindex="-1"
+                                data-target="panel-logistics">
+                                <span class="rq-icon rq-bg-green" aria-hidden="true">
+                                    <!-- Truck -->
+                                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M3 7h11v8H3z" />
+                                        <path d="M14 10h4l3 3v2h-7z" />
+                                        <circle cx="7.5" cy="17.5" r="2.5" />
+                                        <circle cx="18.5" cy="17.5" r="2.5" />
+                                    </svg>
+                                </span>
+                                <span class="rq-label">Logistics</span>
+                            </button>
+
+                            <!-- Travel Agencies -->
+                            <button class="rq-sector-item" role="tab" aria-selected="false" aria-controls="panel-travel"
+                                id="tab-travel" tabindex="-1" data-target="panel-travel">
+                                <span class="rq-icon rq-bg-red" aria-hidden="true">
+                                    <!-- Plane -->
+                                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M10.5 21l1.5-6-6-6 3-3 6 6 6-1.5-7.5 10.5z" />
+                                    </svg>
+                                </span>
+                                <span class="rq-label">Travel Agencies</span>
+                            </button>
+
+                            <!-- Finance -->
+                            <button class="rq-sector-item" role="tab" aria-selected="false"
+                                aria-controls="panel-finance" id="tab-finance" tabindex="-1"
+                                data-target="panel-finance">
+                                <span class="rq-icon rq-bg-yellow" aria-hidden="true">
+                                    <!-- Coins -->
+                                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <ellipse cx="12" cy="6" rx="7" ry="3" />
+                                        <path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6" />
+                                        <path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6" />
+                                    </svg>
+                                </span>
+                                <span class="rq-label">Finance</span>
+                            </button>
+
+                            <!-- Healthcare -->
+                            <button class="rq-sector-item" role="tab" aria-selected="false" aria-controls="panel-health"
+                                id="tab-health" tabindex="-1" data-target="panel-health">
+                                <span class="rq-icon rq-bg-purple" aria-hidden="true">
+                                    <!-- Medical cross -->
+                                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M10 3h4v6h6v4h-6v6h-4v-6H4v-4h6z" />
+                                    </svg>
+                                </span>
+                                <span class="rq-label">Healthcare</span>
+                            </button>
+
+                            <!-- Projects / Services -->
+                            <button class="rq-sector-item" role="tab" aria-selected="false"
+                                aria-controls="panel-projects" id="tab-projects" tabindex="-1"
+                                data-target="panel-projects">
+                                <span class="rq-icon rq-bg-indigo" aria-hidden="true">
+                                    <!-- Layers -->
+                                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M12 2l9 5-9 5-9-5z" />
+                                        <path d="M3 12l9 5 9-5" />
+                                        <path d="M3 17l9 5 9-5" />
+                                    </svg>
+                                </span>
+                                <span class="rq-label">Projects/Services</span>
+                            </button>
+
+                            <!-- Manufacturing -->
+                            <button class="rq-sector-item" role="tab" aria-selected="false"
+                                aria-controls="panel-manufacturing" id="tab-manufacturing" tabindex="-1"
+                                data-target="panel-manufacturing">
+                                <span class="rq-icon rq-bg-gray" aria-hidden="true">
+                                    <!-- Factory -->
+                                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M3 21V9l6 4V9l6 4V7l6 4v10H3z" />
+                                        <path d="M7 21v-4M11 21v-4M15 21v-4M19 21v-4" />
+                                    </svg>
+                                </span>
+                                <span class="rq-label">Manufacturing</span>
+                            </button>
+                        </div>
+
+                        <!-- Right: content panels -->
+                        <div class="rq-sector-panels">
+                            <!-- Real Estate -->
+                            <section id="panel-realestate" class="rq-sector-panel" role="tabpanel"
+                                aria-labelledby="tab-realestate">
+                                <div class="rq-panel-head">
+                                    <span class="rq-panel-icon rq-bg-blue" aria-hidden="true">
+                                        <svg viewBox="0 0 24 24" width="26" height="26" fill="none"
+                                            stroke="currentColor" stroke-width="2">
+                                            <path d="M3 10.5L12 3l9 7.5" />
+                                            <path d="M5 10v10h14V10" />
+                                            <path d="M9 20v-6h6v6" />
+                                        </svg>
+                                    </span>
+                                    <h3 class="rq-panel-title mb-1">Real Estate</h3>
+                                </div>
+                                <p class="rq-panel-desc">
+                                    Manage properties, track leads, and close deals faster with our comprehensive real
+                                    estate CRM.
+                                </p>
+                                <h6 class="rq-kb-title">Key Benefits:</h6>
+                                <ul class="rq-kb-list">
+                                    <li>Property management dashboard</li>
+                                    <li>Lead tracking &amp; nurturing</li>
+                                    <li>Document management</li>
+                                    <li>Commission tracking</li>
+                                </ul>
+                            </section>
+
+                            <!-- Logistics -->
+                            <section id="panel-logistics" class="rq-sector-panel" role="tabpanel"
+                                aria-labelledby="tab-logistics" hidden>
+                                <div class="rq-panel-head">
+                                    <span class="rq-panel-icon rq-bg-green" aria-hidden="true">
+                                        <svg viewBox="0 0 24 24" width="26" height="26" fill="none"
+                                            stroke="currentColor" stroke-width="2">
+                                            <path d="M3 7h11v8H3z" />
+                                            <path d="M14 10h4l3 3v2h-7z" />
+                                            <circle cx="7.5" cy="17.5" r="2.5" />
+                                            <circle cx="18.5" cy="17.5" r="2.5" />
+                                        </svg>
+                                    </span>
+                                    <h3 class="rq-panel-title mb-1">Logistics</h3>
+                                </div>
+                                <p class="rq-panel-desc">Fleet &amp; order tracking, delivery status, and route
+                                    optimization.</p>
+                                <h6 class="rq-kb-title">Key Benefits:</h6>
+                                <ul class="rq-kb-list">
+                                    <li>Shipment tracking</li>
+                                    <li>Warehouse &amp; inventory</li>
+                                    <li>Driver app &amp; POD</li>
+                                    <li>Billing &amp; reconciliation</li>
+                                </ul>
+                            </section>
+
+                            <!-- Travel Agencies -->
+                            <section id="panel-travel" class="rq-sector-panel" role="tabpanel"
+                                aria-labelledby="tab-travel" hidden>
+                                <div class="rq-panel-head">
+                                    <span class="rq-panel-icon rq-bg-red" aria-hidden="true">
+                                        <svg viewBox="0 0 24 24" width="26" height="26" fill="none"
+                                            stroke="currentColor" stroke-width="2">
+                                            <path d="M10.5 21l1.5-6-6-6 3-3 6 6 6-1.5-7.5 10.5z" />
+                                        </svg>
+                                    </span>
+                                    <h3 class="rq-panel-title mb-1">Travel Agencies</h3>
+                                </div>
+                                <p class="rq-panel-desc">Manage itineraries, bookings, and CRM in one place.</p>
+                                <h6 class="rq-kb-title">Key Benefits:</h6>
+                                <ul class="rq-kb-list">
+                                    <li>Package builder &amp; quotes</li>
+                                    <li>Supplier contracts &amp; rates</li>
+                                    <li>Voucher &amp; invoice automation</li>
+                                    <li>Customer portal</li>
+                                </ul>
+                            </section>
+
+                            <!-- Finance -->
+                            <section id="panel-finance" class="rq-sector-panel" role="tabpanel"
+                                aria-labelledby="tab-finance" hidden>
+                                <div class="rq-panel-head">
+                                    <span class="rq-panel-icon rq-bg-yellow" aria-hidden="true">
+                                        <svg viewBox="0 0 24 24" width="26" height="26" fill="none"
+                                            stroke="currentColor" stroke-width="2">
+                                            <ellipse cx="12" cy="6" rx="7" ry="3" />
+                                            <path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6" />
+                                            <path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6" />
+                                        </svg>
+                                    </span>
+                                    <h3 class="rq-panel-title mb-1">Finance</h3>
+                                </div>
+                                <p class="rq-panel-desc">Accounting, approvals, audits, and analytics built for scale.
+                                </p>
+                                <h6 class="rq-kb-title">Key Benefits:</h6>
+                                <ul class="rq-kb-list">
+                                    <li>General ledger &amp; reporting</li>
+                                    <li>Approvals &amp; audit trails</li>
+                                    <li>E-invoicing &amp; payments</li>
+                                    <li>Budgeting &amp; analytics</li>
+                                </ul>
+                            </section>
+
+                            <!-- Healthcare -->
+                            <section id="panel-health" class="rq-sector-panel" role="tabpanel"
+                                aria-labelledby="tab-health" hidden>
+                                <div class="rq-panel-head">
+                                    <span class="rq-panel-icon rq-bg-purple" aria-hidden="true">
+                                        <svg viewBox="0 0 24 24" width="26" height="26" fill="none"
+                                            stroke="currentColor" stroke-width="2">
+                                            <path d="M10 3h4v6h6v4h-6v6h-4v-6H4v-4h6z" />
+                                        </svg>
+                                    </span>
+                                    <h3 class="rq-panel-title mb-1">Healthcare</h3>
+                                </div>
+                                <p class="rq-panel-desc">For clinics &amp; hospitals with patient-first workflows.</p>
+                                <h6 class="rq-kb-title">Key Benefits:</h6>
+                                <ul class="rq-kb-list">
+                                    <li>Patient CRM &amp; appointments</li>
+                                    <li>Inventory &amp; pharmacy</li>
+                                    <li>Insurance claims &amp; billing</li>
+                                    <li>Compliance logs</li>
+                                </ul>
+                            </section>
+
+                            <!-- Projects/Services -->
+                            <section id="panel-projects" class="rq-sector-panel" role="tabpanel"
+                                aria-labelledby="tab-projects" hidden>
+                                <div class="rq-panel-head">
+                                    <span class="rq-panel-icon rq-bg-indigo" aria-hidden="true">
+                                        <svg viewBox="0 0 24 24" width="26" height="26" fill="none"
+                                            stroke="currentColor" stroke-width="2">
+                                            <path d="M12 2l9 5-9 5-9-5z" />
+                                            <path d="M3 12l9 5 9-5" />
+                                            <path d="M3 17l9 5 9-5" />
+                                        </svg>
+                                    </span>
+                                    <h3 class="rq-panel-title mb-1">Projects/Services</h3>
+                                </div>
+                                <p class="rq-panel-desc">Perfect for agencies and consulting teams.</p>
+                                <h6 class="rq-kb-title">Key Benefits:</h6>
+                                <ul class="rq-kb-list">
+                                    <li>Project planning &amp; Gantt</li>
+                                    <li>Timesheets &amp; billing</li>
+                                    <li>Helpdesk &amp; SLAs</li>
+                                    <li>Resource utilization</li>
+                                </ul>
+                            </section>
+
+                            <!-- Manufacturing -->
+                            <section id="panel-manufacturing" class="rq-sector-panel" role="tabpanel"
+                                aria-labelledby="tab-manufacturing" hidden>
+                                <div class="rq-panel-head">
+                                    <span class="rq-panel-icon rq-bg-gray" aria-hidden="true">
+                                        <svg viewBox="0 0 24 24" width="26" height="26" fill="none"
+                                            stroke="currentColor" stroke-width="2">
+                                            <path d="M3 21V9l6 4V9l6 4V7l6 4v10H3z" />
+                                            <path d="M7 21v-4M11 21v-4M15 21v-4M19 21v-4" />
+                                        </svg>
+                                    </span>
+                                    <h3 class="rq-panel-title mb-1">Manufacturing</h3>
+                                </div>
+                                <p class="rq-panel-desc">Production, inventory, and quality in one flow.</p>
+                                <h6 class="rq-kb-title">Key Benefits:</h6>
+                                <ul class="rq-kb-list">
+                                    <li>BOM &amp; work orders</li>
+                                    <li>Production planning</li>
+                                    <li>QC &amp; traceability</li>
+                                    <li>Inventory &amp; procurement</li>
+                                </ul>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Styles (scoped) ===== -->
+        <style>
+            /* surface */
+            .rq-sector-surface {
+                background: #fff;
+                border-radius: 22px;
+                padding: 22px;
+                box-shadow: 0 12px 36px rgba(2, 6, 23, .08)
+            }
+
+            .rq-sector-title {
+                font-weight: 800
+            }
+
+            /* layout */
+            .rq-sector-grid {
+                display: grid;
+                grid-template-columns: 280px 1fr;
+                gap: 22px
+            }
+
+            @media (max-width:992px) {
+                .rq-sector-grid {
+                    grid-template-columns: 1fr;
+                    gap: 16px
+                }
+            }
+
+            /* left nav */
+            .rq-sector-nav {
+                background: #f6f7fb;
+                border: 1px solid #e6e8f0;
+                border-radius: 18px;
+                padding: 10px;
+                display: flex;
+                flex-direction: column;
+                gap: 10px
+            }
+
+            .rq-sector-item {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                width: 100%;
+                background: transparent;
+                border: 1px solid transparent;
+                border-radius: 14px;
+                padding: 12px 14px;
+                text-align: left;
+                cursor: pointer;
+                transition: .18s;
+                font-weight: 600;
+                color: #111827;
+                outline: 0
+            }
+
+            .rq-sector-item:hover {
+                background: #fff;
+                border-color: #e5e7eb
+            }
+
+            .rq-sector-item.is-active {
+                background: #eef5ff;
+                border-color: #cfe2ff;
+                box-shadow: 0 6px 16px rgba(2, 6, 23, .05)
+            }
+
+            .rq-sector-item:focus-visible {
+                box-shadow: 0 0 0 3px rgba(37, 99, 235, .25)
+            }
+
+            .rq-icon {
+                width: 40px;
+                height: 40px;
+                border-radius: 12px;
+                display: grid;
+                place-items: center;
+                color: #fff;
+                font-size: 0
+            }
+
+            .rq-label {
+                line-height: 1
+            }
+
+            /* right panels */
+            .rq-sector-panels {
+                background: #fff;
+                border: 1px solid #e6e8f0;
+                border-radius: 18px;
+                padding: 22px
+            }
+
+            .rq-panel-head {
+                display: flex;
+                align-items: center;
+                gap: 12px
+            }
+
+            .rq-panel-icon {
+                width: 48px;
+                height: 48px;
+                border-radius: 14px;
+                display: grid;
+                place-items: center;
+                color: #fff
+            }
+
+            .rq-panel-title {
+                font-weight: 800;
+                margin: 0
+            }
+
+            .rq-panel-desc {
+                color: #4b5563;
+                margin: .25rem 0 1rem
+            }
+
+            .rq-kb-title {
+                font-weight: 700;
+                margin: .25rem 0 .5rem;
+                color: #111827
+            }
+
+            .rq-kb-list {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(180px, 1fr));
+                gap: 8px 16px;
+                margin: 0;
+                padding-left: 0;
+                list-style: none
+            }
+
+            .rq-kb-list li {
+                position: relative;
+                padding-left: 18px;
+                color: #374151
+            }
+
+            .rq-kb-list li::before {
+                content: "";
+                position: absolute;
+                left: 0;
+                top: .55em;
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background: #9ca3af
+            }
+
+            @media (max-width:576px) {
+                .rq-kb-list {
+                    grid-template-columns: 1fr
+                }
+            }
+
+            /* chip colors */
+            .rq-bg-blue {
+                background: #2563eb
+            }
+
+            .rq-bg-green {
+                background: #16a34a
+            }
+
+            .rq-bg-red {
+                background: #ef4444
+            }
+
+            .rq-bg-yellow {
+                background: #f59e0b
+            }
+
+            .rq-bg-purple {
+                background: #8b5cf6
+            }
+
+            .rq-bg-indigo {
+                background: #4f46e5
+            }
+
+            .rq-bg-gray {
+                background: #6b7280
+            }
+        </style>
+
+        <!-- ===== Tabs JS (vanilla, a11y friendly) ===== -->
+        <script>
+            (function () {
+                const nav = document.querySelector('.rq-sector-nav');
+                const tabs = nav.querySelectorAll('.rq-sector-item[role="tab"]');
+                const panels = document.querySelectorAll('.rq-sector-panel[role="tabpanel"]');
+
+                function activateTab(btn, focusPanel = true) {
+                    const id = btn.getAttribute('data-target');
+                    // tabs
+                    tabs.forEach(t => {
+                        t.classList.toggle('is-active', t === btn);
+                        t.setAttribute('aria-selected', t === btn ? 'true' : 'false');
+                        t.tabIndex = t === btn ? 0 : -1;
+                    });
+                    // panels
+                    panels.forEach(p => {
+                        const show = (p.id === id);
+                        p.hidden = !show;
+                    });
+                    // focus panel title for screen readers
+                    if (focusPanel) {
+                        const panel = document.getElementById(id);
+                        const h = panel.querySelector('.rq-panel-title');
+                        if (h) { h.focus?.(); }
+                    }
+                    // optional hash deep-link
+                    history.replaceState(null, "", "#" + id);
+                }
+
+                // click
+                tabs.forEach(t => {
+                    t.addEventListener('click', () => activateTab(t, false));
+                });
+
+                // keyboard (arrow up/down, home/end)
+                nav.addEventListener('keydown', (e) => {
+                    const current = document.activeElement;
+                    const i = [...tabs].indexOf(current);
+                    if (i < 0) return;
+                    let n = i;
+                    if (e.key === 'ArrowDown' || e.key === 'ArrowRight') { n = (i + 1) % tabs.length; e.preventDefault(); }
+                    if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') { n = (i - 1 + tabs.length) % tabs.length; e.preventDefault(); }
+                    if (e.key === 'Home') { n = 0; e.preventDefault(); }
+                    if (e.key === 'End') { n = tabs.length - 1; e.preventDefault(); }
+                    if (n !== i) { tabs[n].focus(); activateTab(tabs[n], false); }
+                });
+
+                // deep link support (#panel-xxx)
+                const hash = location.hash.replace('#', '');
+                if (hash) {
+                    const matchBtn = document.querySelector('.rq-sector-item[data-target="' + hash + '"]');
+                    if (matchBtn) activateTab(matchBtn, false);
+                }
+            })();
+        </script>
 
 
 
