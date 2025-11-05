@@ -1,0 +1,168 @@
+/* ===========================
+   NAVBAR (Scoped nvb-*)
+=========================== */
+.nvb-header {
+  background-color: var(--bg-white);
+  box-shadow: 0 2px 10px rgba(50, 35, 111, 0.1);
+  position: sticky;
+  top: 0;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+.nvb-container {
+  max-width: 1170px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.nvb-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+}
+
+.nvb-logo img {
+  height: 55px;
+  width: auto;
+}
+
+.nvb-nav {
+  display: flex;
+  align-items: center;
+}
+
+.nvb-menu {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.nvb-menu li a {
+  font-weight: 500;
+  color: var(--body-text-purple);
+  transition: color 0.3s ease;
+}
+
+.nvb-menu li a:hover {
+  color: var(--purple);
+}
+
+/* Dropdown */
+.nvb-dropdown {
+  position: relative;
+}
+
+.nvb-submenu {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  background: var(--bg-white);
+  box-shadow: 0 8px 16px rgba(50, 35, 111, 0.15);
+  border-radius: 10px;
+  padding: 10px 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  z-index: 100;
+}
+
+.nvb-dropdown:hover .nvb-submenu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.nvb-submenu li {
+  padding: 8px 20px;
+}
+
+.nvb-submenu li a {
+  display: block;
+  color: var(--body-text-purple);
+  font-size: 15px;
+}
+
+.nvb-submenu li a:hover {
+  color: var(--purple);
+  background-color: var(--light-purple);
+}
+
+/* Buttons */
+.nvb-btn-wrap {
+  margin-left: 30px;
+}
+
+.nvb-call-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nvb-call-btn {
+  background-color: var(--purple);
+  color: var(--text-white);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Toggler (Mobile) */
+.nvb-toggler {
+  display: none;
+  align-items: center;
+  gap: 15px;
+}
+
+.nvb-menu-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.nvb-menu-btn span {
+  width: 25px;
+  height: 3px;
+  background-color: var(--dark-purple);
+  border-radius: 5px;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+  .nvb-nav {
+    position: absolute;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    background-color: var(--bg-white);
+    padding: 20px 0;
+    box-shadow: 0 5px 15px rgba(50, 35, 111, 0.1);
+    display: none;
+  }
+
+  .nvb-nav.active {
+    display: flex;
+  }
+
+  .nvb-menu {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .nvb-toggler {
+    display: flex;
+  }
+
+  .nvb-call-wrap {
+    display: none;
+  }
+}

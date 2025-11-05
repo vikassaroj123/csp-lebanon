@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Contact Us Page" />
+    <title>Contact Us</title>
+    <!-- Favicons & PWA -->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="https://www.CSP4TECH.com.sa/assets/favicons/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="https://www.CSP4TECH.com.sa/assets/favicons/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="https://www.CSP4TECH.com.sa/assets/favicons/favicon-16x16.png"
+    />
+    <link rel="manifest" href="https://www.CSP4TECH.com.sa/site.webmanifest" />
+    <link
+      rel="mask-icon"
+      href="https://www.CSP4TECH.com.sa/assets/favicons/safari-pinned-tab.svg"
+      color="#0ea5e9"
+    />
+    <meta name="msapplication-TileColor" content="#ffffff" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <!-- Performance -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/icofont.min.css" />
+    <link rel="stylesheet" href="/css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/aos.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/responsive.css" />
+    <link rel="stylesheet" href="zoho-style.css" />
+
+    <!-- Structured Data: Organization (logo for rich results) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "CSP4TECH",
+        "url": "https://www.CSP4TECH.com.sa/",
+        "logo": "https://www.CSP4TECH.com.sa/assets/brand/logo-512x512.png",
+        "sameAs": []
+      }
+    </script>
+
+    <!-- START Google Ads (primary only) + helpers -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=AW-17470273516"
+    ></script>
+    <script>
+      // --- Core gtag setup ---
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "AW-17470273516", { allow_enhanced_conversions: true });
+
+      // --- Conversion helper (call after successful submit) ---
+      window.gtag_report_conversion = function (url) {
+        var cb = function () {
+          if (typeof url !== "undefined") window.location = url;
+        };
+        gtag("event", "conversion", {
+          send_to: "AW-17470273516/WwTsCLfZpZobEOzvvIpB", // keep your label
+          value: 1.0, // optional
+          currency: "INR", // optional
+          event_callback: cb,
+        });
+        return false;
+      };
+
+      // --- Click ID passthrough + persistence to your hidden field (#banner_zc_gad) ---
+      (function () {
+        try {
+          var qs = new URLSearchParams(location.search);
+          var keys = ["gclid", "gbraid", "wbraid"];
+          var found = keys.find((k) => qs.get(k));
+          if (found)
+            localStorage.setItem(
+              "ads_click_id",
+              JSON.stringify({ k: found, v: qs.get(found) })
+            );
+          var saved = localStorage.getItem("ads_click_id");
+          var field = document.getElementById("banner_zc_gad");
+          if (saved && field) field.value = JSON.parse(saved).v;
+        } catch (e) {}
+      })();
+
+      // --- Enhanced Conversions: set user_data right before form submit (capture phase runs first) ---
+      document.addEventListener("DOMContentLoaded", function () {
+        try {
+          var form = document.getElementById("bannerCrmForm");
+          if (form) {
+            form.addEventListener(
+              "submit",
+              function () {
+                try {
+                  var email = (document.getElementById("email")?.value || "")
+                    .trim()
+                    .toLowerCase();
+                  var phone = (
+                    document.getElementById("phoneNumber")?.value || ""
+                  ).replace(/\D+/g, "");
+                  if (email || phone)
+                    gtag("set", "user_data", {
+                      email: email || undefined,
+                      phone_number: phone || undefined,
+                    });
+                } catch (e) {}
+              },
+              true
+            ); // capture
+          }
+        } catch (e) {}
+      });
+
+      // --- Fallback: if redirected back with ?submitted=1, fire conversion once ---
+      (function () {
+        try {
+          var qs = new URLSearchParams(location.search);
+          if (qs.get("submitted") === "1") {
+            if (typeof window.gtag_report_conversion === "function")
+              window.gtag_report_conversion();
+            history.replaceState({}, "", location.pathname + location.hash);
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <!-- this is for navbar  -->
+    <style>
+      /* Show dropdown on hover (for desktop) */
+      .navbar-nav .dropdown:hover .dropdown-menu {
+        display: block;
+        margin-top: 0; /* ensures it stays aligned */
+      }
+
+      /* Optional: change link color on hover */
+      .navbar-nav .dropdown:hover > .nav-link {
+        color: #0d6efd; /* Bootstrap primary color */
+      }
+
+      /* Optional: adjust dropdown menu appearance */
+      .dropdown-menu {
+        border-radius: 0.25rem;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+      }
+
+      /* Ensures the dropdown doesn't close instantly when moving between items */
+      .dropdown-menu {
+        transition: opacity 0.15s ease-in-out;
+      }
+
+      .navbar-nav .dropdown:hover .dropdown-menu {
+        opacity: 1;
+        display: block;
+      }
+    </style>
+    <script
+      src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.8.1/dist/dotlottie-wc.js"
+      type="module"
+    ></script>
+  </head>
+  <body class="light-version">
+    <header class="site-header fixed-top">
+      <nav
+        id="mainNavbar"
+        class="navbar navbar-expand-lg navbar-light bg-white"
+      >
+        <div class="container">
+          <!-- Brand -->
+          <a class="navbar-brand d-flex align-items-center" href="#">
+            <img
+              src="/images/csp.png"
+              alt="CSP4TECH"
+              style="height: 50px; width: auto"
+            />
+          </a>
+
+          <!-- Toggler -->
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarMenu"
+            aria-controls="navbarMenu"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <!-- Menu -->
+          <div class="collapse navbar-collapse" id="navbarMenu">
+            <ul class="navbar-nav ml-auto align-items-lg-center">
+              <li class="nav-item">
+                <a class="nav-link" href="Services/service-index.html"
+                  >Services</a
+                >
+              </li>
+
+              <!-- ✅ Zoho Solutions Dropdown -->
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="zohoDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Zoho Solutions
+                </a>
+                <ul
+                  class="dropdown-menu"
+                  aria-labelledby="zohoDropdown"
+                  style="width: max-content"
+                >
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="/zoho-solution/zoho-book-finace.html"
+                      >Zoho Book Finance</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/zoho-solution/zoho-crm.html"
+                      >Zoho CRM</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="zoho-solution/zoho-people-hr.html"
+                      >Zoho People HR</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="zoho-solution/zoho-one.html"
+                      >Zoho One</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="zoho-solution/zoho-content-creation.html"
+                      >Zoho Creator (Custom App)</a
+                    >
+                  </li>
+                </ul>
+              </li>
+              <!-- ✅ End Zoho Dropdown -->
+              <li class="nav-item">
+                <a class="nav-link" href="#about-us">About Us</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#testimonial_slider">Contact Us</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#faqSuite">FAQ</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a
+                  class="nav-link dark_btn"
+                  href="https://www.CSP4TECH.com.sa/contact-us.html"
+                  >GET STARTED</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <style>
+      /* Space for fixed navbar */
+      @media (min-width: 992px) {
+        body {
+          padding-top: 76px;
+        }
+      }
+
+      @media (max-width: 991.98px) {
+        body {
+          padding-top: 66px;
+        }
+      }
+
+      .site-header .navbar {
+        transition: box-shadow 0.2s ease, background-color 0.2s ease;
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: saturate(1.6) blur(8px);
+      }
+
+      .site-header.nav-scrolled .navbar {
+        box-shadow: 0 8px 24px rgba(2, 6, 23, 0.08);
+      }
+
+      /* Active link styling for scrollspy */
+      #mainNavbar .nav-link.active {
+        font-weight: 700;
+        color: #0d6efd !important;
+      }
+    </style>
+
+    <section class="hero">
+      <div
+        class="breadcumb-area clearfix dzsparallaxer auto-init"
+        data-options='{direction: "normal"}'
+      >
+        <div
+          class="divimage dzsparallaxer--target"
+          style="
+            width: 101%;
+            height: 130%;
+            background-image: url(/img/bg-img/bg-2.jpg);
+          "
+        ></div>
+        <!-- breadcumb content -->
+        <div class="breadcumb-content">
+          <div class="container h-100">
+            <div class="row h-100 align-items-center">
+              <div class="col-12">
+                <nav aria-label="breadcrumb" class="breadcumb--con text-center">
+                  <h2
+                    class="w-text title wow fadeInUp"
+                    style="margin-top: 20px"
+                    data-wow-delay="0.2s"
+                  >
+                    Zoho Books Implementation & Support
+                  </h2>
+                  <p>
+                    Simplify your accounting with Zoho Books — from streamlined
+                    financial operations and tax compliance to automated
+                    invoicing and insightful reporting, we tailor it to fit your
+                    business.
+                  </p>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- get in touch side bar  -->
+    <!-- ===== Contact Panel (Hidden by default) ===== -->
+    <aside class="touch-panel" id="touchPanel">
+      <button class="touch-close-btn" id="touchCloseBtn">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <!-- Request a Quote Form -->
+      <div class="touch-quote">
+        <h2 class="touch-title">Request A Quote</h2>
+        <form class="touch-form">
+          <input
+            type="text"
+            placeholder="Enter name"
+            class="touch-input"
+            required
+          />
+          <input
+            type="email"
+            placeholder="Enter email"
+            class="touch-input"
+            required
+          />
+          <input type="text" placeholder="Enter company" class="touch-input" />
+          <input type="tel" placeholder="Enter mobile" class="touch-input" />
+          <textarea
+            placeholder="Enter your message"
+            class="touch-textarea"
+            rows="3"
+          ></textarea>
+          <button type="submit" class="touch-btn">Submit</button>
+        </form>
+      </div>
+
+      <hr class="touch-divider" />
+
+      <!-- Get In Touch Section -->
+      <div class="touch-contact">
+        <h2 class="touch-title">Get In Touch</h2>
+        <p class="touch-description">
+          Please fill out the form below if you have a plan or project in mind
+          that you'd like to share with us.
+        </p>
+
+        <div class="touch-contact-list">
+          <div class="touch-item">
+            <i class="fa-solid fa-phone touch-icon"></i>
+            <div class="touch-text">
+              <p>
+                <a href="tel:++918129031222" class="touch-link"
+                  >+91-8129031222</a
+                >
+              </p>
+              <span class="touch-subtext">Mon-Sat 9am - 6pm</span>
+            </div>
+          </div>
+
+          <div class="touch-item">
+            <i class="fa-brands fa-whatsapp touch-icon"></i>
+            <div class="touch-text">
+              <p>
+                <a
+                  href="https://wa.me/8129031222"
+                  target="_blank"
+                  class="touch-link"
+                  >+91-8129031222</a
+                >
+              </p>
+              <span class="touch-subtext">Mon-Sat 9am - 6pm</span>
+            </div>
+          </div>
+
+          <div class="touch-item">
+            <i class="fa-solid fa-envelope touch-icon"></i>
+            <div class="touch-text">
+              <p>
+                <a href="mailto:contact@shyphan.com" class="touch-link"
+                  >admin@hitech.com.in</a
+                >
+              </p>
+              <span class="touch-subtext">Online Support</span>
+            </div>
+          </div>
+
+          <div class="touch-item">
+            <i class="fa-solid fa-location-dot touch-icon"></i>
+            <div class="touch-text">
+              <p class="touch-address">
+                Office 8, Second Floor, C4, Sector 63, Noida, India
+              </p>
+              <span class="touch-subtext">Visit Our Office</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="touch-social">
+          <a href="#" class="touch-social-link"
+            ><i class="fab fa-facebook-f"></i
+          ></a>
+          <a href="#" class="touch-social-link"
+            ><i class="fab fa-twitter"></i
+          ></a>
+          <a href="#" class="touch-social-link"
+            ><i class="fab fa-instagram"></i
+          ></a>
+          <a href="#" class="touch-social-link"
+            ><i class="fab fa-linkedin-in"></i
+          ></a>
+          <a href="#" class="touch-social-link"
+            ><i class="fab fa-youtube"></i
+          ></a>
+        </div>
+      </div>
+    </aside>
+    <div class="touch-overlay" id="touchOverlay"></div>
+    <!-- whatsapp icons  -->
+    <div>
+      <a
+        href="https://api.whatsapp.com/send/?phone=%2B918129031222&text&type=phone_number&app_absent=0"
+        aria-label="WhatsApp"
+        style="
+          position: fixed;
+          left: 20px;
+          bottom: 20px;
+          background-color: #25d366;
+          color: white;
+          font-size: 28px;
+          width: 70px;
+          padding: 12px 14px;
+          border-radius: 50%;
+          text-align: center;
+          text-decoration: none;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+          z-index: 1000;
+        "
+      >
+        <i class="fa fa-whatsapp"></i>
+      </a>
+    </div>
+    <!-- About Section -->
+    <section class="about striples-bg">
+      <div class="about-text">
+        <h3 style="font-size: xx-large; font-weight: 600; padding-bottom: 20px">
+          Invoices & Compliance
+        </h3>
+        <p>
+          Zoho Books offers a powerful invoicing and receivables module designed
+          to keep your finances in control and fully compliant with Saudi
+          Arabia’s regulations. Whether you're billing local clients or
+          international customers, Zoho Books ensures every transaction is
+          efficient, accurate, and traceable. With built-in support for ZATCA
+          Phase 1 and Phase 2 (E-invoicing), your invoices are always
+          audit-ready and in line with Saudi tax laws.
+        </p>
+      </div>
+      <div class="about-img">
+        <img
+          style="height: 400px"
+          src="https://www.raqmiat.com.sa/assets/img/zoho-books-n.png"
+          alt="Developers Illustration"
+        />
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features ico-about-bg">
+      <h3>Zoho Books for Saudi Businesses</h3>
+      <p>
+        Simplify finance management, stay fully ZATCA-compliant, and automate
+        your operations with ease using Zoho Books.
+      </p>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/1055/1055646.png"
+            alt="E-invoicing"
+          />
+          <h4>ZATCA E-Invoicing Ready</h4>
+          <p>
+            Generate ZATCA-compliant invoices effortlessly with QR codes and XML
+            for Phase 2.
+          </p>
+          <ul>
+            <li>QR code-enabled invoices</li>
+            <li>Phase 2 XML generation</li>
+            <li>Audit-ready GAZT reports</li>
+          </ul>
+        </div>
+
+        <div class="feature-card">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/2910/2910763.png"
+            alt="Automated Invoicing"
+          />
+          <h4>Smart Invoicing Automation</h4>
+          <p>
+            Send professional invoices automatically, with reminders and
+            recurring billing.
+          </p>
+          <ul>
+            <li>Custom invoice templates</li>
+            <li>Recurring invoices setup</li>
+            <li>Email and WhatsApp delivery</li>
+          </ul>
+        </div>
+
+        <div class="feature-card">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/190/190411.png"
+            alt="Multi-Currency Support"
+          />
+          <h4>Global Multi-Currency Support</h4>
+          <p>
+            Manage transactions in multiple currencies with live rates and
+            accurate tracking.
+          </p>
+          <ul>
+            <li>SAR, USD, EUR and more</li>
+            <li>Currency gains/loss tracking</li>
+            <li>Bank-level reconciliation</li>
+          </ul>
+        </div>
+
+        <div class="feature-card">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+            alt="VAT & Tax Compliance"
+          />
+          <h4>VAT & Tax Simplified</h4>
+          <p>
+            Apply VAT and withholding tax effortlessly with precise reporting.
+          </p>
+          <ul>
+            <li>15% VAT setup</li>
+            <li>Withholding tax on services</li>
+            <li>GAZT-ready return reports</li>
+          </ul>
+        </div>
+
+        <div class="feature-card">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/1006/1006557.png"
+            alt="Online Payment Collection"
+          />
+          <h4>Seamless Online Payments</h4>
+          <p>
+            Accept payments instantly through gateways like STC Pay, PayTabs,
+            and Stripe.
+          </p>
+          <ul>
+            <li>Secure payment links</li>
+            <li>Instant confirmation</li>
+            <li>Automatic reconciliation</li>
+          </ul>
+        </div>
+
+        <div class="feature-card">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/2921/2921222.png"
+            alt="Receivables Dashboard"
+          />
+          <h4>Real-Time Receivables Dashboard</h4>
+          <p>
+            Track outstanding balances, due dates, and payment follow-ups at a
+            glance.
+          </p>
+          <ul>
+            <li>Aging reports</li>
+            <li>Payment alerts</li>
+            <li>Comprehensive receivables overview</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Signup Section -->
+    <section class="getintoch striples-bg">
+      <div class="signup-content">
+        <h3>Why sign up here instead of directly with Zoho?</h3>
+        <ul>
+          <li>
+            ✅ Free support via email - Ask us anything related to Zoho Apps
+          </li>
+          <li>✅ Exclusive discounts – if you subscribe after the trial</li>
+          <li>✅ Extended trial – up to 40 days instead of 14</li>
+        </ul>
+        <img
+          src="/img/authorized-badge-ne.png"
+          alt="Zoho Partner"
+          class="partner-badge"
+          loading="lazy"
+        />
+        <!-- <a href="#" class="btn">Sign Up Now</a> -->
+      </div>
+      <!-- Feedback Form Section -->
+      <div class="form-container">
+        <form action="#" method="POST" class="feedback-form">
+          <h3>Get in Touch</h3>
+
+          <label for="name">Full Name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            placeholder="First Last"
+          />
+
+          <label for="email">Email Address</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            placeholder="Your Email"
+          />
+
+          <label for="phone">Phone Number</label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            required
+            placeholder="Your Phone Number"
+          />
+
+          <label for="company">Company Name</label>
+          <input
+            type="text"
+            id="company"
+            name="company"
+            required
+            placeholder="Company Name"
+          />
+
+          <label for="message">Your Message</label>
+          <textarea
+            id="message"
+            name="message"
+            required
+            placeholder="Write your message here"
+          ></textarea>
+
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="video ico-about-bg striples-bg">
+      <h3>Explore Zoho Books in Action</h3>
+      <p>Explore Zoho Books in Action</p>
+      <div class="video-container">
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/vNu7HEAQG5A?si=lsUkI70xvmRweRbM"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </section>
+    <!--footer section start-->
+    <footer
+      class="footer-section text-white"
+      style="background: linear-gradient(180deg, #6a49f2 0%, #5a3de0 100%)"
+    >
+      <!--footer top start-->
+      <div
+        class="footer-top ptb-60"
+        style="
+          padding: 50px;
+          background: linear-gradient(
+              180deg,
+              rgba(13, 13, 25, 0.85) 0%,
+              rgba(16, 16, 32, 0.92) 100%
+            ),
+            url('/assets/img/page-header-bg.svg') no-repeat bottom right;
+          background-size: cover;
+        "
+      >
+        <div class="container">
+          <div class="row justify-content-between g-4">
+            <!-- About -->
+            <div class="col-12 col-md-6 col-lg-4">
+              <div class="footer-single-col">
+                <h5 class="mb-3 fw-semibold" style="color: #a89ef8">
+                  About CSP4TECH
+                </h5>
+                <p class="mb-3" style="font-size: 14px; line-height: 1.7">
+                  CSP4TECH is a Lebanon Zoho Partner offering CRM, ERP, HRMS,
+                  and Payroll automation tailored to local business needs. We
+                  help Lebanon-based organizations achieve digital
+                  transformation with VAT compliance and localized Zoho
+                  solutions.
+                </p>
+                <div class="d-flex align-items-center mb-2 flex-wrap gap-2">
+                  <img
+                    src="/assets/img/zoho-logo-1.webp"
+                    alt="Zoho Partner Lebanon"
+                    width="38"
+                  />
+                  <img
+                    src="/assets/img/weya-ai-logo.png"
+                    alt="AI Automation Lebanon"
+                    width="38"
+                  />
+                  <img
+                    src="/assets/img/iso-logo-1.png"
+                    alt="ISO Certified Company"
+                    width="38"
+                  />
+                </div>
+                <p class="mb-0" style="font-size: 13px">
+                  ISO Certified Quality Management Systems
+                </p>
+              </div>
+            </div>
+
+            <!-- Explore -->
+            <div class="col-6 col-md-6 col-lg-3">
+              <div class="footer-single-col">
+                <h5 class="mb-3 fw-semibold" style="color: #a89ef8">Explore</h5>
+                <ul
+                  class="list-unstyled footer-nav-list"
+                  style="font-size: 14px; line-height: 1.8"
+                >
+                  <li>
+                    <a
+                      href="https://www.CSP4TECH.com.sa/about-us.html"
+                      class="text-white text-decoration-none"
+                      >About Us</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="https://www.CSP4TECH.com.sa/services.html"
+                      class="text-white text-decoration-none"
+                      >Zoho Services</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="https://www.CSP4TECH.com.sa/zoho-crm.html"
+                      class="text-white text-decoration-none"
+                      >Zoho CRM</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="https://www.CSP4TECH.com.sa/zoho-book.html"
+                      class="text-white text-decoration-none"
+                      >Zoho Books (VAT)</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="https://www.CSP4TECH.com.sa/odoo.html"
+                      class="text-white text-decoration-none"
+                      >Odoo ERP</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Contact -->
+            <div class="col-12 col-md-6 col-lg-4">
+              <div class="footer-single-col">
+                <h5 class="mb-3 fw-semibold" style="color: #a89ef8">
+                  Contact Us
+                </h5>
+                <p style="font-size: 14px">
+                  → Lebanon, Beirut Digital District, Block 1499, Floor 1
+                </p>
+                <p style="font-size: 14px">
+                  → Sector 63 Noida, Plot C4, 2nd Floor, Office No. 8, India
+                </p>
+                <ul class="list-unstyled" style="font-size: 14px">
+                  <li>
+                    <i class="fas fa-envelope me-2" style="color: #a89ef8"></i>
+                    admin@csp4tech.com.in
+                  </li>
+                  <li>
+                    <i class="fas fa-envelope me-2" style="color: #a89ef8"></i>
+                    info@csp4tech.com.in
+                  </li>
+                  <li>
+                    <i class="fas fa-phone me-2" style="color: #a89ef8"></i>
+                    +96178744789
+                  </li>
+                </ul>
+                <div class="mt-3 d-flex flex-wrap gap-3">
+                  <a
+                    href="https://www.linkedin.com/company/CSP4TECH-tech"
+                    target="_blank"
+                    aria-label="LinkedIn Lebanon"
+                    ><i class="fab fa-linkedin fa-lg" style="color: #a89ef8"></i
+                  ></a>
+                  <a
+                    href="https://x.com/CSP4TECHtech"
+                    target="_blank"
+                    aria-label="Twitter X Lebanon"
+                    ><i
+                      class="fab fa-x-twitter fa-lg"
+                      style="color: #a89ef8"
+                    ></i
+                  ></a>
+                  <a
+                    href="https://www.facebook.com/profile.php?id=61578684579721"
+                    target="_blank"
+                    aria-label="Facebook Lebanon"
+                    ><i class="fab fa-facebook fa-lg" style="color: #a89ef8"></i
+                  ></a>
+                  <a
+                    href="https://www.instagram.com/CSP4TECH.it/"
+                    target="_blank"
+                    aria-label="Instagram Lebanon"
+                    ><i
+                      class="fab fa-instagram fa-lg"
+                      style="color: #a89ef8"
+                    ></i
+                  ></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--footer top end-->
+
+      <!--footer bottom start-->
+      <div class="footer-bottom py-3" style="background-color: #1c1543">
+        <div class="container">
+          <div class="row align-items-center text-center text-md-start gy-2">
+            <div class="col-12 col-md-4">
+              <p class="mb-0" style="font-size: 13px">
+                &copy; 2025 CSP4TECH. All rights reserved.
+              </p>
+            </div>
+            <div class="col-12 col-md-4 text-center">
+              <p class="mb-0" style="font-size: 13px; color: #b7a9ff">
+                Digitally Empowering Lebanon
+              </p>
+            </div>
+            <div class="col-12 col-md-4 text-md-end">
+              <a
+                href="privacy-policy.html"
+                class="text-white text-decoration-none"
+                style="font-size: 13px"
+                >Privacy Policy</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--footer bottom end-->
+
+      <!-- Hidden SEO Content for Lebanon -->
+      <div style="display: none" lang="ar" dir="rtl">
+        <h1>شريك زوهو المعتمد في بيروت ولبنان</h1>
+        <p>
+          سي إس بي فور تك شركة لبنانية رائدة في تقديم حلول زوهو المخصصة
+          للأعمال...
+        </p>
+      </div>
+    </footer>
+    <!--footer section end-->
+
+    <!-- Responsive  Styling footer  -->
+    <style>
+      @media (max-width: 992px) {
+        .footer-top {
+          padding: 40px 25px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .footer-top {
+          padding: 35px 15px 50px 15px;
+          /* add bottom padding to prevent cut-off */
+        }
+
+        .footer-single-col {
+          text-align: left !important;
+          padding-left: 10px;
+        }
+
+        .footer-single-col h5 {
+          margin-top: 10px;
+          font-size: 16px;
+        }
+
+        .footer-single-col p,
+        .footer-single-col ul li {
+          font-size: 13px !important;
+          line-height: 1.6;
+        }
+
+        .footer-single-col ul {
+          padding-left: 0;
+          margin-bottom: 10px;
+        }
+
+        .footer-single-col ul li {
+          margin-bottom: 5px;
+        }
+
+        .footer-bottom {
+          text-align: left !important;
+          padding: 15px 15px;
+        }
+
+        .footer-bottom p,
+        .footer-bottom a {
+          font-size: 13px !important;
+        }
+
+        .footer-bottom .col-md-4 {
+          margin-bottom: 10px;
+        }
+
+        .footer-single-col .d-flex {
+          justify-content: flex-start !important;
+          gap: 12px;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .footer-top {
+          padding: 30px 10px 60px 10px;
+          /* extra bottom padding for smaller phones */
+        }
+
+        .footer-single-col {
+          padding-left: 5px;
+        }
+
+        .footer-single-col h5 {
+          font-size: 15px;
+        }
+
+        .footer-single-col p {
+          font-size: 13px;
+        }
+
+        .footer-single-col ul {
+          margin-bottom: 0;
+        }
+
+        .footer-bottom {
+          padding: 15px 10px;
+        }
+
+        .footer-bottom p,
+        .footer-bottom a {
+          font-size: 12px !important;
+        }
+      }
+    </style>
+    <!-- ########## All JS ########## -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/plugins.js"></script>
+    <script src="/js/dzsparallaxer.js"></script>
+    <script src="/js/script.js"></script>
+    <!-- side baar script  -->
+    <script>
+      const panel = document.getElementById("touchPanel");
+      const overlay = document.getElementById("touchOverlay");
+      const closeBtn = document.getElementById("touchCloseBtn");
+
+      // Get all elements that can open the panel
+      const openTriggers = document.querySelectorAll(".touchOpenTrigger");
+
+      function openPanel() {
+        panel.classList.add("touch-active");
+        overlay.classList.add("touch-overlay-show");
+      }
+
+      function closePanel() {
+        panel.classList.remove("touch-active");
+        overlay.classList.remove("touch-overlay-show");
+      }
+
+      // Attach open event to all triggers
+      openTriggers.forEach((trigger) => {
+        trigger.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation(); // 🚫 Stop event from reaching the navbar toggler
+          openPanel();
+        });
+      });
+
+      // Close buttons
+      closeBtn.addEventListener("click", closePanel);
+      overlay.addEventListener("click", closePanel);
+    </script>
+  </body>
+</html>
