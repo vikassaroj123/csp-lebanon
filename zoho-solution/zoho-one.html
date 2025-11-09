@@ -44,6 +44,7 @@
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/responsive.css" />
     <link rel="stylesheet" href="zoho-style.css" />
+    <link rel="stylesheet" href="/css/get-in-touch.css" />
 
     <!-- Structured Data: Organization (logo for rich results) -->
     <script type="application/ld+json">
@@ -177,7 +178,7 @@
     ></script>
   </head>
   <body class="light-version">
-   <header class="site-header fixed-top">
+    <header class="site-header fixed-top">
       <nav
         id="mainNavbar"
         class="navbar navbar-expand-lg navbar-light bg-white"
@@ -232,33 +233,23 @@
                   style="width: max-content"
                 >
                   <li>
-                    <a
-                      class="dropdown-item"
-                      href="/zoho-solution/zoho-book-finace.html"
+                    <a class="dropdown-item" href="zoho-book-finace.html"
                       >Zoho Book Finance</a
                     >
                   </li>
                   <li>
-                    <a class="dropdown-item" href="/zoho-solution/zoho-crm.html"
-                      >Zoho CRM</a
-                    >
+                    <a class="dropdown-item" href="zoho-crm.html">Zoho CRM</a>
                   </li>
                   <li>
-                    <a
-                      class="dropdown-item"
-                      href="zoho-solution/zoho-people-hr.html"
+                    <a class="dropdown-item" href="zoho-people-hr.html"
                       >Zoho People HR</a
                     >
                   </li>
                   <li>
-                    <a class="dropdown-item" href="zoho-solution/zoho-one.html"
-                      >Zoho One</a
-                    >
+                    <a class="dropdown-item" href="zoho-one.html">Zoho One</a>
                   </li>
                   <li>
-                    <a
-                      class="dropdown-item"
-                      href="zoho-solution/zoho-content-creation.html"
+                    <a class="dropdown-item" href="zoho-creator.html"
                       >Zoho Creator (Custom App)</a
                     >
                   </li>
@@ -322,47 +313,59 @@
       }
     </style>
 
-
-    <section class="hero">
-      <div
-        class="breadcumb-area clearfix dzsparallaxer auto-init"
-        data-options='{direction: "normal"}'
+    <!-- about page section  -->
+    <section
+      style="
+        background: radial-gradient(
+          1200px 400px at 50% 20%,
+          rgba(246, 244, 254, 0.9),
+          rgba(246, 244, 254, 0.55) 40%,
+          transparent 70%
+        );
+        padding: 3rem 2rem;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      "
+    >
+      <h2
+        style="
+          color: #220743;
+          font-size: 3rem;
+          font-weight: 600;
+          margin-bottom: 1rem;
+          position: relative;
+          display: inline-block;
+        "
       >
-        <div
-          class="divimage dzsparallaxer--target"
+        Zoho One Implementation & Support
+        <span
           style="
-            width: 101%;
-            height: 130%;
-            background-image: url(/img/bg-img/bg-2.jpg);
+            content: '';
+            display: block;
+            width: 60%;
+            height: 4px;
+            background: var(--purple);
+            margin: 0.5rem auto 0;
+            border-radius: 2px;
           "
-        ></div>
-        <!-- breadcumb content -->
-        <div class="breadcumb-content">
-          <div class="container h-100">
-            <div class="row h-100 align-items-center">
-              <div class="col-12">
-                <nav aria-label="breadcrumb" class="breadcumb--con text-center">
-                  <h2
-                    class="w-text title wow fadeInUp"
-                    style="margin-top: 20px"
-                    data-wow-delay="0.2s"
-                  >
-                    Zoho One Implementation & Support
-                  </h2>
-                  <p>
-                    Empower your entire business with Zoho One — an all-in-one
-                    suite of 45+ integrated applications covering sales,
-                    marketing, finance, HR, operations, and more. Streamline
-                    processes, boost productivity, and accelerate your digital
-                    transformation journey.
-                  </p>
-                </nav>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+        ></span>
+      </h2>
+
+      <p
+        style="
+          color: var(--body-text-purple);
+          font-size: 1.1rem;
+          line-height: 1.8;
+          margin-top: 1rem;
+        "
+      >
+        Empower your entire business with Zoho One — an all-in-one suite of 45+
+        integrated applications covering sales, marketing, finance, HR,
+        operations, and more. Streamline processes, boost productivity, and
+        accelerate your digital transformation journey.
+      </p>
     </section>
+
     <!-- get in touch side bar  -->
     <!-- ===== Contact Panel (Hidden by default) ===== -->
     <aside class="touch-panel" id="touchPanel">
