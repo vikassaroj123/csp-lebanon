@@ -189,7 +189,7 @@
       >
         <div class="container">
           <!-- Brand -->
-          <a class="navbar-brand d-flex align-items-center" href="/">
+          <a class="navbar-brand d-flex align-items-center" href="#">
             <img
               src="/images/csp.png"
               alt="CSP4TECH"
@@ -197,31 +197,32 @@
             />
           </a>
 
-          <!-- Right icons (only visible on mobile) -->
-          <div class="d-flex align-items-center d-lg-none">
-            <span
-              class="call-button touchOpenTrigger me-3"
-              style="cursor: pointer"
-            >
+          <!-- Toggler -->
+          <!-- Navbar Toggler (mobile only) -->
+          <button
+            class="navbar-toggler d-lg-none"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarMenu"
+            aria-controls="navbarMenu"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+            style="
+              display: flex;
+              align-items: center;
+              gap: 16px;
+              margin-right: 10px;
+            "
+          >
+            <span class="call-button touchOpenTrigger" style="cursor: pointer">
               <i class="fa-solid fa-phone"></i>
             </span>
-            <!-- Toggler -->
-            <button
-              class="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarMenu"
-              aria-controls="navbarMenu"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span class="navbar-toggler-icon"></span>
-            </button>
-          </div>
+            <span class="navbar-toggler-icon"></span>
+          </button>
 
-          <!-- Collapsible menu -->
+          <!-- Menu -->
           <div class="collapse navbar-collapse" id="navbarMenu">
-            <ul class="navbar-nav ms-auto align-items-lg-center">
+            <ul class="navbar-nav ml-auto align-items-lg-center">
               <li class="nav-item">
                 <a class="nav-link" href="/Services/service-index.html"
                   >Services</a
@@ -240,11 +241,7 @@
                 >
                   Zoho Solutions
                 </a>
-                <ul
-                  class="dropdown-menu"
-                  aria-labelledby="zohoDropdown"
-                  style="width: max-content"
-                >
+                <ul class="dropdown-menu" aria-labelledby="zohoDropdown">
                   <li>
                     <a class="dropdown-item" href="zoho-book-finace.html"
                       >Zoho Book Finance</a
@@ -262,29 +259,29 @@
                     <a class="dropdown-item" href="zoho-one.html">Zoho One</a>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="zoho-creator.html"
+                    <a class="dropdown-item" href="zoho-content-creation.html"
                       >Zoho Creator (Custom App)</a
                     >
                   </li>
                 </ul>
               </li>
-              <!-- ✅ End Zoho Dropdown -->
 
+              <!-- ✅ End Zoho Dropdown -->
               <li class="nav-item">
                 <a class="nav-link" href="/about.html">About Us</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/contact-us.html">Contact Us</a>
               </li>
+            </ul>
+          </div>
 
-              <!-- ✅ Desktop-only buttons -->
-              <li class="nav-item d-none d-lg-flex align-items-center">
-                <span
-                  class="call-button touchOpenTrigger me-3"
-                  style="cursor: pointer"
-                >
-                  <i class="fa-solid fa-phone"></i>
-                </span>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+              <li class="call-button touchOpenTrigger" style="cursor: pointer">
+                <i class="fa-solid fa-phone"></i>
+              </li>
+              <li class="nav-item">
                 <a
                   class="nav-link dark_btn"
                   href="https://www.CSP4TECH.com.sa/contact-us.html"
@@ -296,10 +293,6 @@
         </div>
       </nav>
     </header>
-
-    <!-- ✅ Bootstrap JS (required for toggler) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
     <style>
       /* Space for fixed navbar */
       @media (min-width: 992px) {
@@ -330,7 +323,6 @@
         color: #0d6efd !important;
       }
     </style>
-
     <!-- about page section  -->
     <section
       style="
@@ -355,7 +347,7 @@
           display: inline-block;
         "
       >
-        Zoho People – Smarter HR Management
+        Zoho Books Implementation & Support
         <span
           style="
             content: '';
@@ -377,8 +369,9 @@
           margin-top: 1rem;
         "
       >
-        Streamline HR processes, empower your workforce, and manage employee
-        life cycles with a cloud-based HRMS that’s built for modern businesses.
+        Simplify your accounting with <strong>Zoho Books</strong> — from
+        streamlined financial operations and tax compliance to automated
+        invoicing and insightful reporting, we tailor it to fit your business.
       </p>
     </section>
 
@@ -495,13 +488,13 @@
       </div>
     </aside>
     <div class="touch-overlay" id="touchOverlay"></div>
-
     <!-- whatsapp icons  -->
     <div>
       <a
         href="https://api.whatsapp.com/send/?phone=%2B96178744789&text&type=phone_number&app_absent=0"
         aria-label="WhatsApp"
         target="_blank"
+        class="whatsapp-float"
         style="
           position: fixed;
           left: 20px;
@@ -521,8 +514,10 @@
         <i class="fab fa-whatsapp"></i>
       </a>
     </div>
+
     <!-- About Section -->
     <section class="about striples-bg">
+    
       <div class="about-text">
         <h3 style="font-size: xx-large; font-weight: 600; padding-bottom: 20px">
           Smarter, Flexible HR with Zoho People
@@ -1059,6 +1054,8 @@
     <script src="/js/plugins.js"></script>
     <script src="/js/dzsparallaxer.js"></script>
     <script src="/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
     <!-- side baar script  -->
     <!-- side baar script  -->
     <script>

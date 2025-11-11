@@ -627,6 +627,65 @@ header.scrolled .navbar-brand img {
     padding: 8px 0;
   }
 }
+/* === IMPROVED DROPDOWN STYLE === */
+
+/* Desktop dropdown */
+.navbar .dropdown-menu {
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  padding: 8px 0;
+  min-width: 200px;
+  background-color: #fff;
+  margin-top: 8px;
+  transition: all 0.2s ease-in-out;
+}
+
+.navbar .dropdown-item {
+  padding: 10px 18px;
+  color: var(--text-dark);
+  font-size: 15px;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+}
+
+.navbar .dropdown-item:hover,
+.navbar .dropdown-item:focus {
+  background-color: #f3f0ff;
+  color: var(--purple);
+  transform: translateX(3px);
+}
+
+/* Mobile dropdown (cleaner & full-width) */
+@media (max-width: 992px) {
+  .navbar .dropdown-menu {
+    position: static;
+    box-shadow: none;
+    background-color: transparent;
+    border-radius: 0;
+    padding: 0;
+    margin: 0;
+  }
+
+  .navbar .dropdown-item {
+    background: none;
+    color: var(--text-dark);
+    font-size: 15px;
+    padding: 8px 5px;
+    text-align: center;
+  }
+
+  .navbar .dropdown-item:hover {
+    background-color: transparent;
+    color: var(--purple);
+    transform: none;
+  }
+
+  /* Space between dropdown and next nav item */
+  .navbar .dropdown-menu li:last-child {
+    margin-bottom: 10px;
+  }
+}
 
 /* === SMOOTH TRANSITION EFFECT FOR HEADER === */
 body {
@@ -3586,4 +3645,73 @@ header.fix_style.white_header {
 
 .map_section {
   margin: 50px 0;
+}
+
+/* === COMMON FLOATING BUTTON BASE === */
+.whatsapp-float,
+.call-float {
+  position: fixed;
+  bottom: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  text-align: center;
+  color: #fff;
+  font-size: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  animation: pulseCircle 2s infinite;
+}
+
+/* === WHATSAPP STYLING === */
+.whatsapp-float {
+  left: 20px;
+  background-color: #25d366;
+}
+
+/* === CALL STYLING === */
+.call-float {
+  right: 20px;
+  background: linear-gradient(135deg, #6a4ddf, #8e6fff);
+}
+
+/* === PULSING ANIMATION === */
+@keyframes pulseCircle {
+  0% {
+    box-shadow: 0 0 0 0 rgba(106, 77, 223, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 20px rgba(106, 77, 223, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(106, 77, 223, 0);
+  }
+}
+
+/* === DIFFERENT COLOR GLOW FOR WHATSAPP === */
+.whatsapp-float {
+  animation: pulseWhatsApp 2s infinite;
+}
+
+@keyframes pulseWhatsApp {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 20px rgba(37, 211, 102, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+  }
+}
+
+/* === OPTIONAL: Hover Effect === */
+.whatsapp-float:hover,
+.call-float:hover {
+  transform: scale(1.1);
+  transition: 0.2s;
 }
