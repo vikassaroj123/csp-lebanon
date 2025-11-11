@@ -130,6 +130,7 @@
     <link rel="stylesheet" href="css/aos.css" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/responsive.css" />
+    <link rel="stylesheet" href="css/get-in-touch.css" />
 
     <!-- Structured Data: Organization (logo for rich results) -->
     <script type="application/ld+json">
@@ -258,6 +259,10 @@
       }
     </style>
     <!-- END Google Ads -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
   </head>
 
   <body>
@@ -285,15 +290,28 @@
             </a>
 
             <!-- Toggler -->
+            <!-- Navbar Toggler (mobile only) -->
             <button
-              class="navbar-toggler"
+              class="navbar-toggler d-lg-none"
               type="button"
-              data-toggle="collapse"
-              data-target="#navbarMenu"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarMenu"
               aria-controls="navbarMenu"
               aria-expanded="false"
               aria-label="Toggle navigation"
+              style="
+                display: flex;
+                align-items: center;
+                gap: 16px;
+                margin-right: 10px;
+              "
             >
+              <span
+                class="call-button touchOpenTrigger"
+                style="cursor: pointer"
+              >
+                <i class="fa-solid fa-phone"></i>
+              </span>
               <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -375,6 +393,12 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav ml-auto">
+                <li
+                  class="call-button touchOpenTrigger"
+                  style="cursor: pointer"
+                >
+                  <i class="fa-solid fa-phone"></i>
+                </li>
                 <li class="nav-item">
                   <a
                     class="nav-link dark_btn"
@@ -418,6 +442,125 @@
           color: #0d6efd !important;
         }
       </style>
+      <!-- get in touch side bar  -->
+      <!-- ===== Contact Panel (Hidden by default) ===== -->
+      <aside class="touch-panel" id="touchPanel">
+        <button class="touch-close-btn" id="touchCloseBtn">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <!-- Request a Quote Form -->
+        <div class="touch-quote">
+          <h2 class="touch-title">Request A Quote</h2>
+          <form class="touch-form">
+            <input
+              type="text"
+              placeholder="Enter name"
+              class="touch-input"
+              required
+            />
+            <input
+              type="email"
+              placeholder="Enter email"
+              class="touch-input"
+              required
+            />
+            <input
+              type="text"
+              placeholder="Enter company"
+              class="touch-input"
+            />
+            <input type="tel" placeholder="Enter mobile" class="touch-input" />
+            <textarea
+              placeholder="Enter your message"
+              class="touch-textarea"
+              rows="3"
+            ></textarea>
+            <button type="submit" class="touch-btn">Submit</button>
+          </form>
+        </div>
+
+        <hr class="touch-divider" />
+
+        <!-- Get In Touch Section -->
+        <div class="touch-contact">
+          <h2 class="touch-title">Get In Touch</h2>
+          <p class="touch-description">
+            Please fill out the form below if you have a plan or project in mind
+            that you'd like to share with us.
+          </p>
+
+          <div class="touch-contact-list">
+            <div class="touch-item">
+              <i class="fa-solid fa-phone touch-icon"></i>
+              <div class="touch-text">
+                <p>
+                  <a href="tel:++918129031222" class="touch-link"
+                    >+91-8129031222</a
+                  >
+                </p>
+                <span class="touch-subtext">Mon-Sat 9am - 6pm</span>
+              </div>
+            </div>
+
+            <div class="touch-item">
+              <i class="fa-brands fa-whatsapp touch-icon"></i>
+              <div class="touch-text">
+                <p>
+                  <a
+                    href="https://wa.me/8129031222"
+                    target="_blank"
+                    class="touch-link"
+                    >+91-8129031222</a
+                  >
+                </p>
+                <span class="touch-subtext">Mon-Sat 9am - 6pm</span>
+              </div>
+            </div>
+
+            <div class="touch-item">
+              <i class="fa-solid fa-envelope touch-icon"></i>
+              <div class="touch-text">
+                <p>
+                  <a href="mailto:contact@shyphan.com" class="touch-link"
+                    >admin@hitech.com.in</a
+                  >
+                </p>
+                <span class="touch-subtext">Online Support</span>
+              </div>
+            </div>
+
+            <div class="touch-item">
+              <i class="fa-solid fa-location-dot touch-icon"></i>
+              <div class="touch-text">
+                <p class="touch-address">
+                  Office 8, Second Floor, C4, Sector 63, Noida, India
+                </p>
+                <span class="touch-subtext">Visit Our Office</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="touch-social">
+            <a href="#" class="touch-social-link"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a href="#" class="touch-social-link"
+              ><i class="fab fa-twitter"></i
+            ></a>
+            <a href="#" class="touch-social-link"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a href="#" class="touch-social-link"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
+            <a href="#" class="touch-social-link"
+              ><i class="fab fa-youtube"></i
+            ></a>
+          </div>
+        </div>
+      </aside>
+      <div class="touch-overlay" id="touchOverlay"></div>
 
       <!-- Banner-Section-Start -->
       <section class="banner_section py-5">
@@ -453,12 +596,6 @@
                     src="assets/img/Auth.png"
                     alt="Zoho Partner"
                     style="max-width: 170px; height: auto"
-                  />
-                  <!-- Your brand -->
-                  <img
-                    src="images/csp.png"
-                    alt="CSP4Tech Logo"
-                    style="max-width: 160px; height: auto"
                   />
                 </div>
 
@@ -4175,6 +4312,38 @@
       }
       window.addEventListener("scroll", onScroll, { passive: true });
       onScroll();
+    </script>
+    <!-- side baar script  -->
+    <script>
+      const panel = document.getElementById("touchPanel");
+      const overlay = document.getElementById("touchOverlay");
+      const closeBtn = document.getElementById("touchCloseBtn");
+
+      // Get all elements that can open the panel
+      const openTriggers = document.querySelectorAll(".touchOpenTrigger");
+
+      function openPanel() {
+        panel.classList.add("touch-active");
+        overlay.classList.add("touch-overlay-show");
+      }
+
+      function closePanel() {
+        panel.classList.remove("touch-active");
+        overlay.classList.remove("touch-overlay-show");
+      }
+
+      // Attach open event to all triggers
+      openTriggers.forEach((trigger) => {
+        trigger.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation(); // 🚫 Stop event from reaching the navbar toggler
+          openPanel();
+        });
+      });
+
+      // Close buttons
+      closeBtn.addEventListener("click", closePanel);
+      overlay.addEventListener("click", closePanel);
     </script>
   </body>
 </html>

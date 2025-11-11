@@ -6,11 +6,11 @@
 
 /* ---------- Vars / fallbacks ---------- */
 :root {
-  --purple: var(--purple, #6a49f2);
-  --dark-purple: var(--dark-purple, #32236f);
-  --body-text-purple: var(--body-text-purple, #3e3f66);
-  --text-white: var(--text-white, #fff);
-  --bg-white: var(--bg-white, #fff);
+  --purple: #6a49f2;
+  --dark-purple: #32236f;
+  --body-text-purple: #3e3f66;
+  --text-white: #fff;
+  --bg-white: #fff;
   --card-radius: 16px;
   --ring: 0 0 0 3px rgba(106, 73, 242, 0.18);
   --shadow-md: 0 10px 30px rgba(50, 35, 111, 0.1);
@@ -22,14 +22,13 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: "Poppins", sans-serif;
 }
 
 /* === Overlay Background (Blur effect) === */
 .touch-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(12, 10, 24, 0.35);
+  background: rgba(16, 10, 24, 0.35);
   backdrop-filter: blur(4px);
   opacity: 0;
   visibility: hidden;
@@ -48,13 +47,14 @@
   right: -420px;
   width: 420px;
   height: 100vh;
-  background: var(--bg-white);
+  background: #f6f4fe;
   border-left: 1px solid rgba(106, 73, 242, 0.1);
   box-shadow: -8px 0 24px rgba(50, 35, 111, 0.14);
   transition: right 0.32s ease;
-  z-index: 1000;
+  z-index: 10000;
   overflow-y: auto;
   padding: 28px 22px;
+  /* margin-top: 20px; */
 }
 .touch-active {
   right: 0;
@@ -83,7 +83,7 @@
   width: 36px;
   height: 36px;
   border-radius: 12px;
-  background: rgba(106, 73, 242, 0.1);
+  /* background: rgba(106, 73, 242, 0.1); */
   border: none;
   color: var(--purple);
   font-size: 18px;

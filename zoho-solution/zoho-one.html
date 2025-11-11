@@ -46,6 +46,11 @@
     <link rel="stylesheet" href="zoho-style.css" />
     <link rel="stylesheet" href="/css/get-in-touch.css" />
 
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+
     <!-- Structured Data: Organization (logo for rich results) -->
     <script type="application/ld+json">
       {
@@ -185,7 +190,7 @@
       >
         <div class="container">
           <!-- Brand -->
-          <a class="navbar-brand d-flex align-items-center" href="#">
+          <a class="navbar-brand d-flex align-items-center" href="/">
             <img
               src="/images/csp.png"
               alt="CSP4TECH"
@@ -194,15 +199,25 @@
           </a>
 
           <!-- Toggler -->
+          <!-- Navbar Toggler (mobile only) -->
           <button
-            class="navbar-toggler"
+            class="navbar-toggler d-lg-none"
             type="button"
-            data-toggle="collapse"
-            data-target="#navbarMenu"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarMenu"
             aria-controls="navbarMenu"
             aria-expanded="false"
             aria-label="Toggle navigation"
+            style="
+              display: flex;
+              align-items: center;
+              gap: 16px;
+              margin-right: 10px;
+            "
           >
+            <span class="call-button touchOpenTrigger" style="cursor: pointer">
+              <i class="fa-solid fa-phone"></i>
+            </span>
             <span class="navbar-toggler-icon"></span>
           </button>
 
@@ -210,7 +225,7 @@
           <div class="collapse navbar-collapse" id="navbarMenu">
             <ul class="navbar-nav ml-auto align-items-lg-center">
               <li class="nav-item">
-                <a class="nav-link" href="Services/service-index.html"
+                <a class="nav-link" href="/Services/service-index.html"
                   >Services</a
                 >
               </li>
@@ -257,19 +272,19 @@
               </li>
               <!-- ✅ End Zoho Dropdown -->
               <li class="nav-item">
-                <a class="nav-link" href="#about-us">About Us</a>
+                <a class="nav-link" href="/about.html">About Us</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#testimonial_slider">Contact Us</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#faqSuite">FAQ</a>
+                <a class="nav-link" href="/contact-us.html">Contact Us</a>
               </li>
             </ul>
           </div>
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
+              <li class="call-button touchOpenTrigger" style="cursor: pointer">
+                <i class="fa-solid fa-phone"></i>
+              </li>
               <li class="nav-item">
                 <a
                   class="nav-link dark_btn"
@@ -503,7 +518,7 @@
           z-index: 1000;
         "
       >
-        <i class="fa fa-whatsapp"></i>
+        <i class="fab fa-whatsapp"></i>
       </a>
     </div>
 
@@ -532,7 +547,7 @@
       <div class="about-img">
         <img
           style="height: 400px"
-          src="/img/Zoho-One-01.png"
+          src="/images/zoho-one-img.png"
           alt="Developers Illustration"
         />
       </div>
