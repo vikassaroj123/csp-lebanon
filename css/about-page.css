@@ -2,11 +2,11 @@
    ROOT VARIABLES
 ===================================== */
 :root {
-  --primary: #0073ff;
-  --primary-dark: #005bcc;
-  --secondary: #0b1a3d;
-  --bg: #ffffff;
-  --bg-alt: #f7f9fc;
+  --primary: #5e33a9;
+  --primary-dark: #5c2696;
+  --secondary: #4e0864;
+  --bg: #e0d9fc;
+  --bg-alt: #f6f4fe;
   --text-dark: #1a1a1a;
   --text-light: #555;
   --radius: 12px;
@@ -31,6 +31,7 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
   scroll-behavior: smooth;
+  background-color: #e0d9fc;
 }
 
 h1,
@@ -96,7 +97,7 @@ img {
   flex-wrap: wrap;
   padding: var(--section-padding);
   background: var(--secondary);
-  background: rgba(19, 4, 118, 0.927);
+  background: rgba(71, 31, 156, 0.82);
 
   /* background-image: url(/img/bg-img/bg-2.jpg);
   background-color: #005bcc; */
@@ -117,9 +118,10 @@ img {
 
 .hero2 p {
   max-width: 600px;
-  font-size: 1rem;
+  font-size: 1.5em;
   opacity: 0.9;
   margin-bottom: 30px;
+  color: black;
 }
 
 .hero-buttons2 {
