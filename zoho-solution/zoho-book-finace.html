@@ -197,32 +197,31 @@
             />
           </a>
 
-          <!-- Toggler -->
-          <!-- Navbar Toggler (mobile only) -->
-          <button
-            class="navbar-toggler d-lg-none"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarMenu"
-            aria-controls="navbarMenu"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-            style="
-              display: flex;
-              align-items: center;
-              gap: 16px;
-              margin-right: 10px;
-            "
-          >
-            <span class="call-button touchOpenTrigger" style="cursor: pointer">
+          <!-- Right icons (only visible on mobile) -->
+          <div class="d-flex align-items-center d-lg-none">
+            <span
+              class="call-button touchOpenTrigger me-3"
+              style="cursor: pointer"
+            >
               <i class="fa-solid fa-phone"></i>
             </span>
-            <span class="navbar-toggler-icon"></span>
-          </button>
+            <!-- Toggler -->
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarMenu"
+              aria-controls="navbarMenu"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          </div>
 
-          <!-- Menu -->
+          <!-- Collapsible menu -->
           <div class="collapse navbar-collapse" id="navbarMenu">
-            <ul class="navbar-nav ml-auto align-items-lg-center">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
               <li class="nav-item">
                 <a class="nav-link" href="/Services/service-index.html"
                   >Services</a
@@ -247,44 +246,55 @@
                   style="width: max-content"
                 >
                   <li>
-                    <a class="dropdown-item" href="zoho-book-finace.html"
+                    <a
+                      class="dropdown-item"
+                      href="zoho-book-finace.html"
                       >Zoho Book Finance</a
                     >
                   </li>
                   <li>
-                    <a class="dropdown-item" href="zoho-crm.html">Zoho CRM</a>
+                    <a class="dropdown-item" href="zoho-crm.html"
+                      >Zoho CRM</a
+                    >
                   </li>
                   <li>
-                    <a class="dropdown-item" href="zoho-people-hr.html"
+                    <a
+                      class="dropdown-item"
+                      href="zoho-people-hr.html"
                       >Zoho People HR</a
                     >
                   </li>
                   <li>
-                    <a class="dropdown-item" href="zoho-one.html">Zoho One</a>
+                    <a class="dropdown-item" href="zoho-one.html"
+                      >Zoho One</a
+                    >
                   </li>
                   <li>
-                    <a class="dropdown-item" href="zoho-creator.html"
+                    <a
+                      class="dropdown-item"
+                      href="zoho-creator.html"
                       >Zoho Creator (Custom App)</a
                     >
                   </li>
                 </ul>
               </li>
               <!-- ✅ End Zoho Dropdown -->
+
               <li class="nav-item">
                 <a class="nav-link" href="/about.html">About Us</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/contact-us.html">Contact Us</a>
               </li>
-            </ul>
-          </div>
 
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto">
-              <li class="call-button touchOpenTrigger" style="cursor: pointer">
-                <i class="fa-solid fa-phone"></i>
-              </li>
-              <li class="nav-item">
+              <!-- ✅ Desktop-only buttons -->
+              <li class="nav-item d-none d-lg-flex align-items-center">
+                <span
+                  class="call-button touchOpenTrigger me-3"
+                  style="cursor: pointer"
+                >
+                  <i class="fa-solid fa-phone"></i>
+                </span>
                 <a
                   class="nav-link dark_btn"
                   href="https://www.CSP4TECH.com.sa/contact-us.html"
@@ -296,6 +306,10 @@
         </div>
       </nav>
     </header>
+
+    <!-- ✅ Bootstrap JS (required for toggler) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
     <style>
       /* Space for fixed navbar */
       @media (min-width: 992px) {
