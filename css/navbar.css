@@ -167,45 +167,150 @@
   }
 }
 
-/* === Call Button Styling (Mobile View) === */
-.call-button {
-  display: inline-flex;
+/* === Call Button Styling (All Views) === */
+.call-button,
+.navbar-nav .call-button,
+.navbar-nav li.call-button {
+  display: inline-flex !important;
   justify-content: center;
   align-items: center;
-  width: 38px;
-  height: 38px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  background: #1357be;
+  background: linear-gradient(135deg, #1357be 0%, #1a6dd8 50%, #2d8ef0 100%);
+  background-size: 200% 200%;
   color: #fff;
-  font-size: 16px;
+  font-size: 18px;
   margin-right: 10px;
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
   flex-shrink: 0;
+  border: 3px solid rgba(19, 87, 190, 0.5);
+  box-shadow: 0 4px 12px rgba(19, 87, 190, 0.3), 
+              0 2px 4px rgba(0, 0, 0, 0.1),
+              inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  overflow: visible !important;
+  z-index: 10;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 /* Hover and tap feedback */
-.call-button:hover {
-  background: #1357bea7;
-  transform: scale(1.08);
+.call-button:hover,
+.navbar-nav .call-button:hover,
+.navbar-nav li.call-button:hover {
+  background: linear-gradient(135deg, #1a6dd8 0%, #1357be 50%, #0d4a9e 100%);
+  transform: scale(1.1);
+  border-color: rgba(19, 87, 190, 0.7);
+  box-shadow: 0 6px 20px rgba(19, 87, 190, 0.5), 
+              0 4px 8px rgba(0, 0, 0, 0.15),
+              inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
-/* Subtle pulsing ring animation to draw attention */
-@keyframes pulse-ring {
+/* Wave circle animation for call button - enhanced with multiple waves */
+.call-button::before,
+.call-button::after,
+.navbar-nav .call-button::before,
+.navbar-nav .call-button::after,
+.navbar-nav li.call-button::before,
+.navbar-nav li.call-button::after {
+  content: '' !important;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 3px solid rgba(19, 87, 190, 0.6);
+  animation: waveCircleCall 2s infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.call-button::after,
+.navbar-nav .call-button::after,
+.navbar-nav li.call-button::after {
+  animation-delay: 1s;
+  border-width: 2px;
+}
+
+.call-button i,
+.navbar-nav .call-button i,
+.navbar-nav li.call-button i {
+  position: relative;
+  z-index: 2;
+  animation: iconPulse 2s ease-in-out infinite;
+}
+
+/* Enhanced wave animation */
+@keyframes waveCircleCall {
   0% {
-    box-shadow: 0 0 0 0 rgba(19, 87, 190, 0.4);
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+    border-width: 3px;
+    transform: translate(-50%, -50%) scale(1);
   }
-  70% {
-    box-shadow: 0 0 0 10px rgba(19, 87, 190, 0);
+  50% {
+    opacity: 0.4;
+    border-width: 2px;
   }
   100% {
-    box-shadow: 0 0 0 0 rgba(19, 87, 190, 0);
+    width: 280%;
+    height: 280%;
+    opacity: 0;
+    border-width: 1px;
+    transform: translate(-50%, -50%) scale(1);
   }
 }
 
-.call-button {
-  animation: pulse-ring 2s infinite;
+/* Icon pulse animation */
+@keyframes iconPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Additional wave effect using box-shadow animation - already applied above */
+
+@keyframes waveShadow {
+  0% {
+    box-shadow: 0 4px 12px rgba(19, 87, 190, 0.3), 
+                0 2px 4px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2),
+                0 0 0 0 rgba(19, 87, 190, 0.4);
+  }
+  50% {
+    box-shadow: 0 4px 12px rgba(19, 87, 190, 0.3), 
+                0 2px 4px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2),
+                0 0 0 15px rgba(19, 87, 190, 0);
+  }
+  100% {
+    box-shadow: 0 4px 12px rgba(19, 87, 190, 0.3), 
+                0 2px 4px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2),
+                0 0 0 0 rgba(19, 87, 190, 0);
+  }
 }
 
 /* Align call button + link horizontally */
@@ -224,4 +329,65 @@
 .book-btn .book-call-btn:hover {
   background: #1357bea7;
   transform: translateY(-2px);
+}
+
+/* === Responsive Call Button === */
+@media (max-width: 991.98px) {
+  .call-button,
+  .navbar-nav .call-button,
+  .navbar-nav li.call-button {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+    margin-right: 8px;
+    border-width: 2.5px;
+  }
+  
+  .call-button i,
+  .navbar-nav .call-button i,
+  .navbar-nav li.call-button i {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 576px) {
+  .call-button,
+  .navbar-nav .call-button,
+  .navbar-nav li.call-button {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+    margin-right: 6px;
+    border-width: 2px;
+  }
+  
+  .call-button i,
+  .navbar-nav .call-button i,
+  .navbar-nav li.call-button i {
+    font-size: 14px;
+  }
+  
+  .call-button::before,
+  .call-button::after,
+  .navbar-nav .call-button::before,
+  .navbar-nav .call-button::after,
+  .navbar-nav li.call-button::before,
+  .navbar-nav li.call-button::after {
+    border-width: 2px;
+  }
+  
+  @keyframes waveCircleCall {
+    0% {
+      width: 100%;
+      height: 100%;
+      opacity: 0.8;
+      border-width: 2px;
+    }
+    100% {
+      width: 250%;
+      height: 250%;
+      opacity: 0;
+      border-width: 1px;
+    }
+  }
 }

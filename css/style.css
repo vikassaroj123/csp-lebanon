@@ -616,6 +616,15 @@ header.scrolled .navbar-brand img {
     margin: 12px auto;
     width: 80%;
   }
+  
+  /* Ensure call button in navbar works properly */
+  .navbar-nav li.call-button {
+    display: inline-flex !important;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow: visible !important;
+  }
 
   .dropdown-menu {
     position: static;
@@ -685,6 +694,25 @@ header.scrolled .navbar-brand img {
   .navbar .dropdown-menu li:last-child {
     margin-bottom: 10px;
   }
+}
+
+/* === Call Button in Navbar - Override any conflicting styles === */
+.navbar-nav li.call-button,
+.navbar-nav .call-button {
+  display: inline-flex !important;
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: visible !important;
+  position: relative !important;
+}
+
+.navbar-nav li.call-button::before,
+.navbar-nav li.call-button::after,
+.navbar-nav .call-button::before,
+.navbar-nav .call-button::after {
+  content: '' !important;
+  display: block !important;
 }
 
 /* === SMOOTH TRANSITION EFFECT FOR HEADER === */
@@ -3692,21 +3720,56 @@ header.fix_style.white_header {
   }
 }
 
-/* === DIFFERENT COLOR GLOW FOR WHATSAPP === */
+/* === WAVE CIRCLE ANIMATION FOR WHATSAPP === */
 .whatsapp-float {
-  animation: pulseWhatsApp 2s infinite;
+  position: relative;
+  animation: none;
+  overflow: visible;
 }
 
-@keyframes pulseWhatsApp {
+.whatsapp-float::before,
+.whatsapp-float::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid rgba(37, 211, 102, 0.6);
+  animation: waveCircle 2s infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.whatsapp-float::after {
+  animation-delay: 1s;
+}
+
+.whatsapp-float i {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes waveCircle {
   0% {
-    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6);
-  }
-  70% {
-    box-shadow: 0 0 0 20px rgba(37, 211, 102, 0);
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    border-width: 2px;
   }
   100% {
-    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+    width: 200%;
+    height: 200%;
+    opacity: 0;
+    border-width: 1px;
   }
+}
+
+/* === DIFFERENT COLOR GLOW FOR WHATSAPP === */
+.whatsapp-float {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 /* === OPTIONAL: Hover Effect === */
@@ -3714,4 +3777,48 @@ header.fix_style.white_header {
 .call-float:hover {
   transform: scale(1.1);
   transition: 0.2s;
+}
+
+/* === Responsive WhatsApp Button === */
+@media (max-width: 768px) {
+  .whatsapp-float {
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+    left: 15px;
+    bottom: 15px;
+  }
+  
+  .whatsapp-float i {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .whatsapp-float {
+    width: 56px;
+    height: 56px;
+    font-size: 22px;
+    left: 12px;
+    bottom: 12px;
+  }
+  
+  .whatsapp-float i {
+    font-size: 22px;
+  }
+  
+  @keyframes waveCircle {
+    0% {
+      width: 100%;
+      height: 100%;
+      opacity: 1;
+      border-width: 2px;
+    }
+    100% {
+      width: 180%;
+      height: 180%;
+      opacity: 0;
+      border-width: 1px;
+    }
+  }
 }
